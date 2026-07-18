@@ -15,3 +15,8 @@ html, body, app-root {
 body {
   background-color: #F2FFFE;
 }
+.goal-checkbox {
+  .mdc-checkbox__background {
+    border-radius: 4.21px;
+  }
+}
