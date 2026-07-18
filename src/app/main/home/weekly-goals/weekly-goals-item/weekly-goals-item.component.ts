@@ -3,6 +3,7 @@ import { WeeklyGoalsItemAnimations } from './weekly-goals-item.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-weekly-goals-item',
@@ -11,7 +12,7 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: WeeklyGoalsItemAnimations,
   standalone: true,
-  imports: [
+  imports: [ MatCheckboxModule
   ],
 })
 export class WeeklyGoalsItemComponent implements OnInit {
@@ -20,6 +21,8 @@ export class WeeklyGoalsItemComponent implements OnInit {
 
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
+  text: string = 'Apply to Microsoft';
+  hashtag: string = 'apply-internships';
 
   // --------------- LOCAL UI STATE ----------------------
 

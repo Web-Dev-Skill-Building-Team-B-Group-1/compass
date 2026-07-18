@@ -1,7 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
 :host {
   display: block;
+  font-family: 'Oxygen', sans-serif;
+  
   .weekly-goals-item-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    width: 100%;
+  }
+
+  .goal-card {
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    gap: 9px;
+    width: 387px;
+    height: 65px;
+    padding: 10px 8px 16px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+  }
+
+  .goal-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .goal-title {
+    margin: 0;
+    font-size: 16.25px;
+    font-weight: 400;
+    color: #5a5a5a;
+  }
+
+  .goal-tag {
+    margin: 4px 0 0;
+    font-size: 15px;
+    color: #2ec4c7;
+  }
+
+  .goal-checkbox {
+    left: 2px;
+    bottom: 10px;
+    margin: 0;
+    transform: scale(1.2);
+
+    --mdc-checkbox-unselected-icon-color: #2ec4c7;
+    --mdc-checkbox-selected-icon-color: #2ec4c7;
+    --mdc-checkbox-selected-checkmark-color: white;
+
+    --mdc-checkbox-unselected-hover-icon-color: #2ec4c7;
+    --mdc-checkbox-selected-hover-icon-color: #2ec4c7;
+
+    --mdc-checkbox-unselected-focus-icon-color: #2ec4c7;
+    --mdc-checkbox-selected-focus-icon-color: #2ec4c7;
+  }
+
+  ::ng-deep .goal-checkbox .mat-mdc-checkbox-ripple,
+  ::ng-deep .goal-checkbox .mat-mdc-checkbox-touch-target {
+    display: none;
+  }
+
+  ::ng-deep .goal-checkbox .mdc-checkbox__background {
+    border-color: #2ec4c7;
+  }
+
+  ::ng-deep .goal-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background {
+    background-color: #2ec4c7;
+    border-color: #2ec4c7;
+  }
+
+  ::ng-deep .goal-checkbox .mdc-checkbox__checkmark {
+    color: white;
   }
 }
