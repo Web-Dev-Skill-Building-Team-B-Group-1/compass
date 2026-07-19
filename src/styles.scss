@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@include mat.core();
+
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+
+$compass-theme: mat.define-theme((
+  typography: (
+    plain-family: 'Oxygen',
+    brand-family: 'Oxygen',
+  )
+));
 
 html, body, app-root {
   height: 100%;
@@ -6,6 +17,9 @@ html, body, app-root {
   padding: 0;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  @include mat.core-theme($compass-theme);
+  @include mat.typography-hierarchy($compass-theme);
+  @include mat.all-component-typographies($compass-theme);
 }
 
 *, *:before, *:after {
