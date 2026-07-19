@@ -1,8 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject, WritableSignal, signal } from '@angular/core';
 import { WeeklyGoalsModalAnimations } from './weekly-goals-modal.animations';
-import { User } from 'src/app/core/store/user/user.model';
-import { AuthStore } from 'src/app/core/store/auth/auth.store';
-import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-weekly-goals-modal',
@@ -12,33 +11,24 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   animations: WeeklyGoalsModalAnimations,
   standalone: true,
   imports: [
+    FormsModule,
   ],
 })
 export class WeeklyGoalsModalComponent implements OnInit {
-  readonly authStore = inject(AuthStore);
-  // --------------- INPUTS AND OUTPUTS ------------------
-
-  /** The current signed in user. */
-  currentUser: Signal<User> = this.authStore.user;
-
   // --------------- LOCAL UI STATE ----------------------
-
-  /** Loading icon. */
-  loading: WritableSignal<boolean> = signal(false);
-
-  // --------------- COMPUTED DATA -----------------------
-
+  titleInput: WritableSignal<string> = signal('Weekly Goals');
   // --------------- EVENT HANDLING ----------------------
-
+  save(): void {
+    this.dialogRef.close(this.titleInput());
+  }
+  cancel(): void {
+    this.dialogRef.close();
+  }
   // --------------- OTHER -------------------------------
-
   constructor(
-    private injector: Injector,
-    @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
+    private dialogRef: MatDialogRef<WeeklyGoalsModalComponent>,
   ) { }
-
   // --------------- LOAD AND CLEANUP --------------------
-  
   ngOnInit(): void {
   }
 }
