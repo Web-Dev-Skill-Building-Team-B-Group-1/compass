@@ -13,6 +13,7 @@ import { endOfWeek, startOfWeek } from 'src/app/core/utils/time.utils';
 })
 export class WeeklyGoalsHeaderComponent implements OnInit {
   // --------------- INPUTS AND OUTPUTS ------------------
+  editClicked: OutputEmitterRef<boolean> = output<boolean>();
 
   // no input for this component – it's not needed :)
   editClicked = output<boolean>();

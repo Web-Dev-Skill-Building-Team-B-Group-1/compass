@@ -15,11 +15,13 @@ import { CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop } from '@angular/cdk/d
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: WeeklyGoalsAnimations,
   standalone: true,
-  imports: [WeeklyGoalsHeaderComponent, 
-            WeeklyGoalsModalComponent,
-            CdkDropList,
-            CdkDrag,
-            CdkDragHandle,]
+  imports: [
+    WeeklyGoalsHeaderComponent, 
+    WeeklyGoalsModalComponent,
+    CdkDropList,
+    CdkDrag,
+    CdkDragHandle
+  ]
   
 })
 export class WeeklyGoalsComponent implements OnInit {
@@ -146,7 +148,6 @@ export class WeeklyGoalsComponent implements OnInit {
   dialogRef: MatDialogRef<any>;
 
   // --------------- COMPUTED DATA -----------------------
-
   // --------------- EVENT HANDLING ----------------------
 
   /** Update weekly goals. */
@@ -175,12 +176,10 @@ export class WeeklyGoalsComponent implements OnInit {
   }
 
   // --------------- OTHER -------------------------------
-
   constructor(
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) { }
-
   // --------------- LOAD AND CLEANUP --------------------
 
   ngOnInit() { }

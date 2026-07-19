@@ -128,7 +128,6 @@ export class WeeklyGoalsModalComponent implements OnInit {
     },
     private fb: FormBuilder,
   ) { }
-
   // --------------- LOAD AND CLEANUP --------------------
 
   ngOnInit() {

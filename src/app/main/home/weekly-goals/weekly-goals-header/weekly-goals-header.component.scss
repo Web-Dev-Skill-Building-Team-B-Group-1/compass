@@ -28,4 +28,42 @@
     padding-left: 18px;
     margin-top: 18px;
   }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .title {
+      font-size: 28px;
+      font-weight: 400;
+      margin: 0;
+      color: #4B5853;
+      line-height: 100%;
+      font-family: Oxygen;
+
+    }
+  
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      .edit-icon{
+        width: 20px;
+        height: 20px;
+        
+      }
+    }
+  }
+
+  .date-range {
+    font-weight: 700;
+    margin: 12px 0 24px;
+    color: #4B5853;
+    font-family: Oxygen;
+    line-height: 100%;
+    font-size: 23px;
+  }
+
 }
