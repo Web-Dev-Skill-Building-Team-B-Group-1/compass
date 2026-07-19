@@ -1,17 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
 
-html, body, app-root {
+@include mat.core();
+
+$primary: #2dbdb1;
+$secondary: #e1fbf9;
+
+$compass-theme: mat.define-theme(
+  (
+    typography: (
+      plain-family: "Oxygen",
+      brand-family: "Oxygen",
+    ),
+  )
+);
+
+html {
+  @include mat.core-theme($compass-theme);
+  @include mat.typography-hierarchy($compass-theme);
+  @include mat.all-component-typographies($compass-theme);
+}
+
+html,
+body,
+app-root {
   height: 100%;
   box-sizing: border-box;
   padding: 0;
+  overflow-x: clip;
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
+.goal-modal-panel {
+  .mat-mdc-dialog-surface {
+    border-radius: 10px 10px 0 0 !important;
+  }
 }
 
-body {
-  background-color: #F2FFFE;
+/** Manipulate initial background color */
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white !important;
+}
+
+/** Manipulate background color on hover and focus */
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.mat-form-field-flex>.mat-form-field-infix {
+  padding: 0px 0px !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+  border-bottom-color: $primary !important;
+}
+
+.mdc-text-field__input {
+  caret-color: $primary !important;
+}
+
+/** For drag and drop global styles */
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

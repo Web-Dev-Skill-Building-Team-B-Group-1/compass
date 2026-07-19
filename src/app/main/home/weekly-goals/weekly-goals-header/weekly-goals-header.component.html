@@ -1,10 +1,9 @@
 <div class="weekly-goals-header-container">
-  <div class="title-row">
-    <h2 class="title">Weekly Goals</h2>
-    <button class="icon-btn" aria-label="Edit" (click)="editGoals()">
+  <div class="top-bar">
+    <div class="card-title">Weekly Goals</div>
+    <button class="edit-button" (click)="editGoals()">
       <img class="edit-icon" src="/images/edit.svg" alt="Edit" />
     </button>
   </div>
-  <p class="date-range">{{ startOfWeek() + " - " + endOfWeek() }}</p>
-
+  <div class="week-timeframe">{{ startOfWeek() + " - " + endOfWeek() }}</div>
 </div>
