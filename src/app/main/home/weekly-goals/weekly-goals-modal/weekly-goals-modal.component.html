@@ -1,3 +1,12 @@
 <div class="weekly-goals-modal-container">
-  weekly-goals-modal works!
+  <h2>Edit Weekly Goals Title</h2>
+  <input
+    type="text"
+    [(ngModel)]="titleInput"
+    placeholder="Weekly Goals"
+  />
+  <div class="modal-actions">
+    <button (click)="cancel()">Cancel</button>
+    <button (click)="save()">Save</button>
+  </div>
 </div>

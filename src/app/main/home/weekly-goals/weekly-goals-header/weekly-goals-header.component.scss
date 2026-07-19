@@ -1,7 +1,51 @@
+@import url(//fonts.googleapis.com/css?family=Oxygen:400,700);
 :host {
   display: block;
+
   .weekly-goals-header-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    border: 1px solid #e3e3e8;
+    border-radius: 12px;
+    padding: 24px;
+    background: #fff;
+    max-width: 387px;
+    
   }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .title {
+      font-size: 28px;
+      font-weight: 400;
+      margin: 0;
+      color: #4B5853;
+      line-height: 100%;
+      font-family: Oxygen;
+
+    }
+  
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      .edit-icon{
+        width: 20px;
+        height: 20px;
+        
+      }
+    }
+  }
+
+  .date-range {
+    font-weight: 700;
+    margin: 12px 0 24px;
+    color: #4B5853;
+    font-family: Oxygen;
+    line-height: 100%;
+    font-size: 23px;
+  }
+
 }

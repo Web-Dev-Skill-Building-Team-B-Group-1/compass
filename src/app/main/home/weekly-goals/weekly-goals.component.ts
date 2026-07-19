@@ -3,6 +3,8 @@ import { WeeklyGoalsAnimations } from './weekly-goals.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { WeeklyGoalsHeaderComponent } from './weekly-goals-header/weekly-goals-header.component';
 
 @Component({
   selector: 'app-weekly-goals',
@@ -12,31 +14,36 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   animations: WeeklyGoalsAnimations,
   standalone: true,
   imports: [
+    WeeklyGoalsHeaderComponent,
   ],
 })
 export class WeeklyGoalsComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
-
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
-
   // --------------- LOCAL UI STATE ----------------------
-
   /** Loading icon. */
   loading: WritableSignal<boolean> = signal(false);
-
   // --------------- COMPUTED DATA -----------------------
-
   // --------------- EVENT HANDLING ----------------------
-
+  openModal(editClicked: boolean) {
+    this.snackBar.open(
+      'Clicked to edit',
+      '',
+      {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center',
+      },
+    );
+  }
   // --------------- OTHER -------------------------------
-
   constructor(
     private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
+    private snackBar: MatSnackBar,
   ) { }
-
   // --------------- LOAD AND CLEANUP --------------------
   
   ngOnInit(): void {
