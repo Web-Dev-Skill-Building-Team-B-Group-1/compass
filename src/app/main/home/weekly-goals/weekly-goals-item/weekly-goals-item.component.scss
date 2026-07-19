@@ -1,7 +1,29 @@
-:host {
-  display: block;
-  .weekly-goals-item-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+$divider-color: rgba(0, 0, 0, 0.15);
+
+.weekly-goals-item-container {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid $divider-color;
+  padding: 4px 10px 4px 0px;
+
+  .checkbox {
+    cursor: pointer;
+  }
+
+  .goal-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .goal-title {
+      font-size: 16px;
+      color: #5a5a5a;
+      padding: 8px 0px 4px 0px;
+    }
+
+    .goal-hashtag {
+      font-size: 13px;
+      color: #ee8b72;
+    }
   }
 }
