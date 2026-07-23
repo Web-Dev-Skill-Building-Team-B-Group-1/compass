@@ -3,7 +3,6 @@ import { WeeklyGoalsAnimations } from './weekly-goals.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
-
 @Component({
   selector: 'app-weekly-goals',
   templateUrl: './weekly-goals.component.html',

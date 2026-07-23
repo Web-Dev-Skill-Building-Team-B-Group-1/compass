@@ -1,5 +1,3 @@
-
-
 :host {
   display: block;
   .long-term-goals-header-container {
@@ -10,37 +8,28 @@
     font-style: plain;
     padding: 16px;
     align-items: center;
-
-    .row-layout{
+    .row-layout {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      line-height: 100%;
       height: 100%;
-
-      .long-term-goals-header-title{
-      height: 29px;
-      width: 290px;
-      font-size: 28px;
-      color: #4B5853;
-      display: flex;
+      .long-term-goals-header-title {
+        height: 29px;
+        width: 290px;
+        font-size: 28px;
+        color: #4B5853;
+        display: flex;  
       }
-    
-
-  .edit-button{
-    cursor: pointer;
-    background: none;
-    border: none;
-    
-    
-    .edit-icon{
-      width: 20px;
-      height: 20px;
-      
+      .edit-button {
+        cursor: pointer;
+        background: none;
+        border: none;
+        .edit-icon {
+          width: 20px;
+          height: 20px;
+        }
+      } 
     }
-  }
-      
-    }
-
   }
 }
+
