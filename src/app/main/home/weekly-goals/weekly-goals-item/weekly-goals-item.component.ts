@@ -4,6 +4,7 @@ import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { WeeklyGoalData } from 'src/app/core/store/weekly-goal/weekly-goal.model';
 
 @Component({
   selector: 'app-weekly-goals-item',
@@ -12,17 +13,23 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: WeeklyGoalsItemAnimations,
   standalone: true,
-  imports: [ MatCheckboxModule
+  imports: [
+    MatCheckboxModule,
   ],
 })
 export class WeeklyGoalsItemComponent implements OnInit {
   readonly authStore = inject(AuthStore);
+
   // --------------- INPUTS AND OUTPUTS ------------------
 
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
-  text: string = 'Apply to Microsoft';
-  hashtag: string = 'apply-internships';
+
+  /** Weekly goal data passed in from the parent component. */
+  goal: Signal<WeeklyGoalData> = input.required<WeeklyGoalData>();
+
+  /** Emits the updated checkbox state to the parent component. */
+  completedChange = output<boolean>();
 
   // --------------- LOCAL UI STATE ----------------------
 
@@ -41,7 +48,7 @@ export class WeeklyGoalsItemComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

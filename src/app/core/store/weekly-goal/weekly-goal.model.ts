@@ -1,4 +1,5 @@
 import { Timestamp } from '@angular/fire/firestore';
+import { Hashtag } from 'src/app/core/store/hashtag/hashtag.model';
 
 export interface WeeklyGoal {
   __id: string;
@@ -13,4 +14,9 @@ export interface WeeklyGoal {
   _createdAt?: Timestamp;
   _updatedAt?: Timestamp;
   _deleted?: boolean;
+}
+
+/** Weekly goal data with its associated hashtag. */
+export interface WeeklyGoalData extends WeeklyGoal {
+  hashtag: Hashtag;
 }

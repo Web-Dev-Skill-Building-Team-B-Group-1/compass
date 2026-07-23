@@ -1,4 +1,6 @@
 <div class="weekly-goals-container">
-  <app-weekly-goals-item>
-    </app-weekly-goals-item>
+  <app-weekly-goals-item
+    [goal]="sampleData"
+    (completedChange)="updateGoalCompletion($event)">
+  </app-weekly-goals-item>
 </div>

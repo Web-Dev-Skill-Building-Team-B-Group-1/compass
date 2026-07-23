@@ -1,10 +1,21 @@
 <div class="weekly-goals-item-container">
   <div class="goal-card">
-    <mat-checkbox class="goal-checkbox"></mat-checkbox>
+    <mat-checkbox
+      class="goal-checkbox"
+      [checked]="goal().completed"
+      (change)="completedChange.emit($event.checked)">
+    </mat-checkbox>
 
     <div class="goal-content">
-      <h3 class="goal-title"> {{ text }} </h3>
-      <p class="goal-tag">#{{ hashtag }}</p>
+      <h3 class="goal-title">
+        {{ goal().text }}
+      </h3>
+
+      <p
+        class="goal-tag"
+        [style.color]="goal().hashtag.color">
+        #{{ goal().hashtag.name }}
+      </p>
     </div>
   </div>
 </div>
