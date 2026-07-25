@@ -6,6 +6,7 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 import { LongTermGoalsComponent } from './long-term-goals/long-term-goals.component';
 import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
