@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, Signal, signal } from '@angular/core';
 import { WeeklyGoalsAnimations } from './weekly-goals.animations';
+import { User } from 'src/app/core/store/user/user.model';
+import { AuthStore } from 'src/app/core/store/auth/auth.store';
+import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 import { WeeklyGoalsHeaderComponent } from './weekly-goals-header/weekly-goals-header.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WeeklyGoalsModalComponent } from './weekly-goals-modal/weekly-goals-modal.component';

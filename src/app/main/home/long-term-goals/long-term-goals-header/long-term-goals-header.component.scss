@@ -1,7 +1,35 @@
 :host {
   display: block;
   .long-term-goals-header-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    width: 387px;
+    height: 80px;
+    background-color: #ffff;
+    font-family: Oxygen;
+    font-style: plain;
+    padding: 16px;
+    align-items: center;
+    .row-layout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      .long-term-goals-header-title {
+        height: 29px;
+        width: 290px;
+        font-size: 28px;
+        color: #4B5853;
+        display: flex;  
+      }
+      .edit-button {
+        cursor: pointer;
+        background: none;
+        border: none;
+        .edit-icon {
+          width: 20px;
+          height: 20px;
+        }
+      } 
+    }
   }
 }
+
