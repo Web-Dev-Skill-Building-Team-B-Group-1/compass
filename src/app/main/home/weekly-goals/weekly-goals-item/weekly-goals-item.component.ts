@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, OutputEmitterRef, Signal, input, output} from '@angular/core';
 import { WeeklyGoalsItemAnimations } from './weekly-goals-item.animations';
-import { User } from 'src/app/core/store/user/user.model';
-import { AuthStore } from 'src/app/core/store/auth/auth.store';
-import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { WeeklyGoalData } from '../../home.model';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { WeeklyGoalData } from 'src/app/core/store/weekly-goal/weekly-goal.model';
 
 @Component({
   selector: 'app-weekly-goals-item',
@@ -22,30 +22,22 @@ export class WeeklyGoalsItemComponent implements OnInit {
 
   // --------------- INPUTS AND OUTPUTS ------------------
 
-  /** The current signed in user. */
-  currentUser: Signal<User> = this.authStore.user;
-
-  /** Weekly goal data passed in from the parent component. */
-  goal: Signal<WeeklyGoalData> = input.required<WeeklyGoalData>();
-
-  /** Emits the updated checkbox state to the parent component. */
-  completedChange = output<boolean>();
+  goal: Signal<WeeklyGoalData> = input<WeeklyGoalData>();
+  checked: OutputEmitterRef<WeeklyGoalData> = output<WeeklyGoalData>();
 
   // --------------- LOCAL UI STATE ----------------------
-
-  /** Loading icon. */
-  loading: WritableSignal<boolean> = signal(false);
 
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
 
+  checkGoal() {
+    this.checked.emit(this.goal());
+  }
+
   // --------------- OTHER -------------------------------
 
-  constructor(
-    private injector: Injector,
-    @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
-  ) { }
+  constructor(private snackBar: MatSnackBar) {}
 
   // --------------- LOAD AND CLEANUP --------------------
 
