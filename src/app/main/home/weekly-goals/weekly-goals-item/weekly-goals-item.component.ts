@@ -4,6 +4,7 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WeeklyGoalData } from '../../home.model';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-weekly-goals-item',
@@ -12,9 +13,13 @@ import { WeeklyGoalData } from '../../home.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: WeeklyGoalsItemAnimations,
   standalone: true,
-  imports: [MatCheckbox, MatProgressSpinner],
+  imports: [
+    MatCheckboxModule,
+  ],
 })
 export class WeeklyGoalsItemComponent implements OnInit {
+  readonly authStore = inject(AuthStore);
+
   // --------------- INPUTS AND OUTPUTS ------------------
 
   goal: Signal<WeeklyGoalData> = input<WeeklyGoalData>();
@@ -36,5 +41,6 @@ export class WeeklyGoalsItemComponent implements OnInit {
 
   // --------------- LOAD AND CLEANUP --------------------
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

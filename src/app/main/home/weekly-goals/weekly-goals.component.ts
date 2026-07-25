@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit, Signal, signal } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore
 import { WeeklyGoalsAnimations } from './weekly-goals.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
@@ -8,13 +9,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { WeeklyGoalsModalComponent } from './weekly-goals-modal/weekly-goals-modal.component';
 import { QuarterlyGoalData, WeeklyGoalData } from '../home.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Timestamp } from '@angular/fire/firestore';
 import { CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-weekly-goals',
   templateUrl: './weekly-goals.component.html',
-  styleUrls: ['./weekly-goals.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: WeeklyGoalsAnimations,
   standalone: true,
@@ -151,7 +150,23 @@ export class WeeklyGoalsComponent implements OnInit {
   dialogRef: MatDialogRef<any>;
 
   // --------------- COMPUTED DATA -----------------------
+  
   // --------------- EVENT HANDLING ----------------------
+  
+  /** Displays a snackbar when the goal checkbox changes. */
+  showSnackbar(goal: WeeklyGoalData): void {
+      this.snackBar.open(
+        goal.completed ? 'Marked goal as complete' : 'Marked goal as incomplete',
+        '',
+        {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center',
+        },
+    );
+  }
+  
+  // --------------- OTHER -------------------------------
 
   /** Update weekly goals. */
   openModal(editClicked: boolean) {
@@ -185,5 +200,6 @@ export class WeeklyGoalsComponent implements OnInit {
   ) { }
   // --------------- LOAD AND CLEANUP --------------------
 
-  ngOnInit() { }
+  ngOnInit(): void {
+  }
 }
