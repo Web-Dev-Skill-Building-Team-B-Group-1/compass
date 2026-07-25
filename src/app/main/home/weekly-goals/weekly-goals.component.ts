@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { WeeklyGoalsAnimations } from './weekly-goals.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
@@ -58,17 +59,23 @@ export class WeeklyGoalsComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
-  /** Updates the completion state of the weekly goal. */
-  updateGoalCompletion(completed: boolean): void {
-    this.sampleData = {
-      ...this.sampleData,
-      completed,
-   };
-  }
+  /** Displays a snackbar when the goal checkbox changes. */
+  showSnackbar(completed: boolean): void {
+    this.snackBar.open(
+    completed ? 'Marked goal as complete' : 'Marked goal as incomplete',
+    '',
+    {
+      duration: 3000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'center',
+    },
+  );
+}
   // --------------- OTHER -------------------------------
 
   constructor(
     private injector: Injector,
+    private snackBar: MatSnackBar,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
   ) { }
 
