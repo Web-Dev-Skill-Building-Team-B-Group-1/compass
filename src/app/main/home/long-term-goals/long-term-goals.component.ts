@@ -3,6 +3,9 @@ import { LongTermGoalsAnimations } from './long-term-goals.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { LongTermGoalsItemComponent } from './long-term-goals-item/long-term-goals-item.component';
+import { LongTermGoal } from 'src/app/core/store/long-term-goal/long-term-goal.model';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-long-term-goals',
@@ -11,7 +14,7 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: LongTermGoalsAnimations,
   standalone: true,
-  imports: [
+  imports: [ LongTermGoalsItemComponent,
   ],
 })
 export class LongTermGoalsComponent implements OnInit {
@@ -20,6 +23,19 @@ export class LongTermGoalsComponent implements OnInit {
 
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
+  
+  sampleData = signal<LongTermGoal>({
+  __id: 'ltg1',
+  __userId: 'test-user',
+  oneYear: 'Secure SWE or UX Engineering Internship',
+  fiveYear: 'Working as a SWE in a team I love with some UX/Design oriented work',
+  longTermGoalNotes: '',
+  oneYearNotes: '',
+  fiveYearNotes: '',
+  _createdAt: Timestamp.now(),
+  _updatedAt: Timestamp.now(),
+  _deleted: false,
+});
 
   // --------------- LOCAL UI STATE ----------------------
 
