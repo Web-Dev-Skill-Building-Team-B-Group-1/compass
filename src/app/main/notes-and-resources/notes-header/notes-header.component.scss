@@ -1,7 +1,26 @@
 :host {
-  display: block;
-  .notes-header-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+  .top-bar{
+    position: relative;
+    color: #4B5853;
+    font-family: Oxygen;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 47.6px;
+    leading-trim: NONE;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+      .close-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+      
+        .close-icon {
+          color: #4B5853;
+        }
+    }
   }
 }

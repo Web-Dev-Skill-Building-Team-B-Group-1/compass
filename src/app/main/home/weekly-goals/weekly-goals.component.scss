@@ -1,7 +1,18 @@
 :host {
   display: block;
+
   .weekly-goals-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 24px;
+  }
+
+  app-weekly-goals-item {
+    width: 387px;
+    height: 65px;
+    max-width: 100%;
   }
 }

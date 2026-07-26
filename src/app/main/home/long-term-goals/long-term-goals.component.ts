@@ -6,6 +6,8 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
 import { LongTermGoalsItemComponent } from './long-term-goals-item/long-term-goals-item.component';
 import { LongTermGoal } from 'src/app/core/store/long-term-goal/long-term-goal.model';
 import { Timestamp } from '@angular/fire/firestore';
+import { LongTermGoalsHeaderComponent } from './long-term-goals-header/long-term-goals-header.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-long-term-goals',
@@ -14,7 +16,9 @@ import { Timestamp } from '@angular/fire/firestore';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: LongTermGoalsAnimations,
   standalone: true,
-  imports: [ LongTermGoalsItemComponent,
+  imports: [
+    LongTermGoalsHeaderComponent,
+    LongTermGoalsItemComponent
   ],
 })
 export class LongTermGoalsComponent implements OnInit {
@@ -25,17 +29,17 @@ export class LongTermGoalsComponent implements OnInit {
   currentUser: Signal<User> = this.authStore.user;
   
   sampleData = signal<LongTermGoal>({
-  __id: 'ltg1',
-  __userId: 'test-user',
-  oneYear: 'Secure SWE or UX Engineering Internship',
-  fiveYear: 'Working as a SWE in a team I love with some UX/Design oriented work',
-  longTermGoalNotes: '',
-  oneYearNotes: '',
-  fiveYearNotes: '',
-  _createdAt: Timestamp.now(),
-  _updatedAt: Timestamp.now(),
-  _deleted: false,
-});
+    __id: 'ltg1',
+    __userId: 'test-user',
+    oneYear: 'Secure SWE or UX Engineering Internship',
+    fiveYear: 'Working as a SWE in a team I love with some UX/Design oriented work',
+    longTermGoalNotes: '',
+    oneYearNotes: '',
+    fiveYearNotes: '',
+    _createdAt: Timestamp.now(),
+    _updatedAt: Timestamp.now(),
+    _deleted: false,
+  });
 
   // --------------- LOCAL UI STATE ----------------------
 
@@ -45,12 +49,25 @@ export class LongTermGoalsComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
+  
+  openModal( editClicked: boolean){
+    this.snackBar.open(
+      'Clicked to edit',
+      '',
+      {
+        duration: 300,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center',
+      },
+    );
+  }
 
   // --------------- OTHER -------------------------------
 
   constructor(
     private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
+    private snackBar: MatSnackBar,
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------

@@ -1,4 +1,6 @@
-<div class="long-term-goals-container"></div>
-<app-long-term-goals-item
-  [goal]="sampleData()">
-</app-long-term-goals-item>
+<div class="long-term-goals-container">
+  <app-long-term-goals-header (editClicked)="openModal($event)"/>
+  <app-long-term-goals-item
+    [goal]="sampleData()">
+  </app-long-term-goals-item>
+</div>
