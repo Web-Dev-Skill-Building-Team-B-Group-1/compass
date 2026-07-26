@@ -16,18 +16,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class WeeklyGoalsModalComponent implements OnInit {
   // --------------- LOCAL UI STATE ----------------------
-  titleInput: WritableSignal<string> = signal('Weekly Goals');
+
   // --------------- EVENT HANDLING ----------------------
-  save(): void {
-    this.dialogRef.close(this.titleInput());
-  }
-  cancel(): void {
-    this.dialogRef.close();
-  }
+
   // --------------- OTHER -------------------------------
-  constructor(
-    private dialogRef: MatDialogRef<WeeklyGoalsModalComponent>,
-  ) { }
+
   // --------------- LOAD AND CLEANUP --------------------
   ngOnInit(): void {
   }

@@ -15,7 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: WeeklyGoalsHeaderAnimations,
   standalone: true,
-  imports: [ MatIconModule,
+  imports: [
+    MatIconModule,
   ],
 })
 export class WeeklyGoalsHeaderComponent implements OnInit {
@@ -24,12 +25,12 @@ export class WeeklyGoalsHeaderComponent implements OnInit {
   editClicked: OutputEmitterRef<boolean> = output<boolean>();
 
   /** The current signed in user. */
-  currentUser: Signal<User> = this.authStore.user;
+
 
   // --------------- LOCAL UI STATE ----------------------
 
   /** Loading icon. */
-  loading: WritableSignal<boolean> = signal(false);
+
 
  // --------------- COMPUTED DATA -----------------------
   endOfWeek = endOfWeek;
@@ -48,8 +49,7 @@ export class WeeklyGoalsHeaderComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) { }
 
-  // --------------- LOAD AND CLEANUP --------------------
-  
+  // --------------- LOAD AND CLEANUP -------------------- 
   ngOnInit(): void {
   }
 }
