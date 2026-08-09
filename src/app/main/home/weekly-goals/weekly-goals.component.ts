@@ -21,6 +21,7 @@ import { WeeklyGoalsItemComponent } from './weekly-goals-item/weekly-goals-item.
     WeeklyGoalsHeaderComponent, 
     WeeklyGoalsItemComponent,
     WeeklyGoalsModalComponent,
+    WeeklyGoalsItemComponent,
     CdkDropList,
     CdkDrag,
     CdkDragHandle
