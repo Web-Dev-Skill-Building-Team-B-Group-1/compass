@@ -18,7 +18,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
 })
 export class WeeklyGoalsItemComponent implements OnInit {
-  readonly authStore = inject(AuthStore);
 
   // --------------- INPUTS AND OUTPUTS ------------------
 

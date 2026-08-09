@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
-import { Timestamp } from '@angular/fire/firestore
+import { Timestamp } from '@angular/fire/firestore';
 import { WeeklyGoalsAnimations } from './weekly-goals.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
@@ -10,7 +10,7 @@ import { WeeklyGoalsModalComponent } from './weekly-goals-modal/weekly-goals-mod
 import { QuarterlyGoalData, WeeklyGoalData } from '../home.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop } from '@angular/cdk/drag-drop';
-
+import { WeeklyGoalsItemComponent } from './weekly-goals-item/weekly-goals-item.component';
 @Component({
   selector: 'app-weekly-goals',
   templateUrl: './weekly-goals.component.html',
@@ -20,6 +20,7 @@ import { CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop } from '@angular/cdk/d
   imports: [
     WeeklyGoalsHeaderComponent, 
     WeeklyGoalsModalComponent,
+    WeeklyGoalsItemComponent,
     CdkDropList,
     CdkDrag,
     CdkDragHandle
