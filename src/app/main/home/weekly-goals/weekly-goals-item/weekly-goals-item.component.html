@@ -3,7 +3,7 @@
     <mat-checkbox
       class="goal-checkbox"
       [checked]="goal().completed"
-      (change)="completedChange.emit($event.checked)">
+      (change)="checkGoal()">
     </mat-checkbox>
 
     <div class="goal-content">
