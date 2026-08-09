@@ -19,6 +19,7 @@ import { WeeklyGoalsItemComponent } from './weekly-goals-item/weekly-goals-item.
   standalone: true,
   imports: [
     WeeklyGoalsHeaderComponent, 
+    WeeklyGoalsItemComponent,
     WeeklyGoalsModalComponent,
     WeeklyGoalsItemComponent,
     CdkDropList,

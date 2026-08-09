@@ -8,6 +8,7 @@ import { LongTermGoalsComponent } from './long-term-goals/long-term-goals.compon
 import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
 import { LongTermGoalsItemComponent } from './long-term-goals/long-term-goals-item/long-term-goals-item.component';
 import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.component';
+import { DateTimeComponent } from './date-time/date-time.component';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,12 @@ import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.compo
   standalone: true,
   animations: HomeAnimations,
   imports: [
-    NavbarComponent, LongTermGoalsComponent, LongTermGoalsItemComponent, WeeklyGoalsComponent, QuarterlyGoalsComponent,
+    NavbarComponent,
+    LongTermGoalsComponent,
+    LongTermGoalsItemComponent,
+    WeeklyGoalsComponent,
+    QuarterlyGoalsComponent,
+    DateTimeComponent,
   ]
 })
 export class HomeComponent implements OnInit {

@@ -1,7 +1,40 @@
 :host {
   display: block;
   .date-time-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    background-color: #E1FBF9;
+    display: flex;
+    flex-direction: column;
+    color: #2DBDB1;
+    text-align: right;
+    justify-content: center;
+    .time{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      .hour-minutes{
+        font-size: 56px;
+      }
+      .period-seconds{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        width: 32px;
+        .period{
+          font-size: 14px;
+          
+        }
+        .seconds{
+          font-size: 14px;
+          letter-spacing: 22%;
+          
+        }
+      }
+    }
+   .date{
+      color: #4B5853;
+      font-size: 18px;
+      margin-top: 8px;
+   } 
   }
 }
