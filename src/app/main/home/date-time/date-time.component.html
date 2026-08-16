@@ -1,3 +1,10 @@
 <div class="date-time-container">
-  date-time works!
+  <div class = "time">
+    <div class = "hour-minutes"> {{ timeSet() | date: 'h:mm' }} </div>
+    <div class ="period-seconds">
+      <div class="period">{{ timeSet() | date: 'a'}}</div>
+      <div class="seconds"> {{ timeSet() | date: 'ss' }}</div>
+    </div>
+  </div>
+  <div class="date"> {{ formattedDate }}</div>
 </div>

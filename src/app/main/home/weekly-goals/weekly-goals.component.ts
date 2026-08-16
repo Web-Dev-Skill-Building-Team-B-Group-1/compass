@@ -26,6 +26,7 @@ import { FormArray } from '@angular/forms';
     WeeklyGoalsHeaderComponent,
     WeeklyGoalsItemComponent,
     WeeklyGoalsModalComponent,
+    WeeklyGoalsItemComponent,
     CdkDropList,
     CdkDrag,
     CdkDragHandle
