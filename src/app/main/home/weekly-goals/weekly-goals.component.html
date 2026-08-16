@@ -2,6 +2,6 @@
   <app-weekly-goals-header (editClicked)="openModal($event)"></app-weekly-goals-header>
   <app-weekly-goals-item
     [goal]="incompleteWeeklyGoals()[0]"
-    (checked)="showSnackbar($event)">
+    (checked)="toggleGoalComplete($event)">
   </app-weekly-goals-item>
 </div>

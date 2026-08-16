@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
-import { Timestamp } from '@angular/fire/firestore
+import { Timestamp } from '@angular/fire/firestore';
 import { WeeklyGoalsAnimations } from './weekly-goals.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
@@ -10,6 +10,11 @@ import { WeeklyGoalsModalComponent } from './weekly-goals-modal/weekly-goals-mod
 import { QuarterlyGoalData, WeeklyGoalData } from '../home.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { WeeklyGoalsItemComponent } from './weekly-goals-item/weekly-goals-item.component';
+import { WeeklyGoalStore } from 'src/app/core/store/weekly-goal/weekly-goal.store';
+import { QuarterlyGoalStore, LoadQuarterlyGoal } from 'src/app/core/store/quarterly-goal/quarterly-goal.store';
+import { HashtagStore, LoadHashtag } from 'src/app/core/store/hashtag/hashtag.store';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-weekly-goals',
@@ -18,7 +23,8 @@ import { CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop } from '@angular/cdk/d
   animations: WeeklyGoalsAnimations,
   standalone: true,
   imports: [
-    WeeklyGoalsHeaderComponent, 
+    WeeklyGoalsHeaderComponent,
+    WeeklyGoalsItemComponent,
     WeeklyGoalsModalComponent,
     CdkDropList,
     CdkDrag,
@@ -27,124 +33,66 @@ import { CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop } from '@angular/cdk/d
   
 })
 export class WeeklyGoalsComponent implements OnInit {
+  private readonly authStore = inject(AuthStore);
+  private readonly weeklyGoalStore = inject(WeeklyGoalStore);
+  private readonly quarterlyGoalStore = inject(QuarterlyGoalStore);
+  private readonly hashtagStore = inject(HashtagStore);
+  private readonly batchWriteService = inject<BatchWriteService>(BATCH_WRITE_SERVICE);
   // --------------- INPUTS AND OUTPUTS ------------------
 
   // --------------- LOCAL UI STATE ----------------------
 
-  incompleteWeeklyGoals: Signal<WeeklyGoalData[]> = signal([
-    {
-      __id: 'wg1',
-      __userId: 'test-user',
-      __quarterlyGoalId: 'qg1',
-      __hashtagId: 'ht1',
-      text: 'Finish Google Cover Letter',
-      completed: false,
-      order: 1,
-      hashtag: {
-        __id: 'ht1',
-        name: 'coverletter',
-        color: '#EE8B72',
-      },
-    },
-    {
-      __id: 'wg2',
-      __userId: 'test-user',
-      __quarterlyGoalId: 'qg2',
-      __hashtagId: 'ht2',
-      text: 'Apply to Microsoft',
-      completed: false,
-      order: 2,
-      hashtag: {
-        __id: 'ht2',
-        name: 'apply',
-        color: '#2DBDB1',
-      },
-    },
-  ]);
+  incompleteWeeklyGoals: Signal<WeeklyGoalData[]> = computed(() => {
+    const userId = this.authStore.user()?.__id;
+    const goals = this.weeklyGoalStore.selectEntities(
+      [
+        ['__userId', '==', userId],
+        ['completed', '==', false],
+      ],
+      { orderBy: 'order' },
+    );
+    return goals.map(g => ({
+      ...g,
+      hashtag: this.hashtagStore.selectEntity(g.__hashtagId),
+    }));
+  });
 
-  completeWeeklyGoals: Signal<WeeklyGoalData[]> = signal([
-    {
-      __id: 'wg3',
-      __userId: 'test-user',
-      __quarterlyGoalId: 'qg3',
-      __hashtagId: 'ht3',
-      text: 'Review data structures',
-      completed: true,
-      order: 3,
-      hashtag: {
-        __id: 'ht3',
-        name: 'interview',
-        color: '#FFB987',
-        _deleted: false,
-      },
-    },
-  ]);
+  completeWeeklyGoals: Signal<WeeklyGoalData[]> = computed(() => {
+    const userId = this.authStore.user()?.__id;
+    const goals = this.weeklyGoalStore.selectEntities(
+      [
+        ['__userId', '==', userId],
+        ['completed', '==', true],
+        ['completionDate', '>=', this.startOfWeek()],
+      ],
+      { orderBy: 'order' },
+    );
+    return goals.map(g => ({
+      ...g,
+      hashtag: this.hashtagStore.selectEntity(g.__hashtagId),
+    }));
+  });
 
-  quarterlyGoals: Signal<QuarterlyGoalData[]> = signal([
-    {
-      __id: 'qg1',
-      __userId: 'test-user',
-      __hashtagId: 'ht1',
-      text: 'Finish cover letters',
-      completed: false,
-      order: 1,
-      _createdAt: Timestamp.now(),
-      _updatedAt: Timestamp.now(),
-      _deleted: false,
-      hashtag: {
-        __id: 'ht1',
-        name: 'coverletter',
-        color: '#EE8B72',
-        _createdAt: Timestamp.now(),
-        _updatedAt: Timestamp.now(),
-        _deleted: false,
-      },
-      weeklyGoalsTotal: 1,
-      weeklyGoalsComplete: 0,
-    },
-    {
-      __id: 'qg2',
-      __userId: 'test-user',
-      __hashtagId: 'ht2',
-      text: 'Apply to internships',
-      completed: false,
-      order: 2,
-      _createdAt: Timestamp.now(),
-      _updatedAt: Timestamp.now(),
-      _deleted: false,
-      hashtag: {
-        __id: 'ht2',
-        name: 'apply',
-        color: '#2DBDB1',
-        _createdAt: Timestamp.now(),
-        _updatedAt: Timestamp.now(),
-        _deleted: false,
-      },
-      weeklyGoalsTotal: 1,
-      weeklyGoalsComplete: 0,
-    },
-    {
-      __id: 'qg3',
-      __userId: 'test-user',
-      __hashtagId: 'ht3',
-      text: 'Technical interview prep!',
-      completed: false,
-      order: 3,
-      _createdAt: Timestamp.now(),
-      _updatedAt: Timestamp.now(),
-      _deleted: false,
-      hashtag: {
-        __id: 'ht3',
-        name: 'interview',
-        color: '#FFB987',
-        _createdAt: Timestamp.now(),
-        _updatedAt: Timestamp.now(),
-        _deleted: false,
-      },
-      weeklyGoalsTotal: 1,
-      weeklyGoalsComplete: 1,
-    },
-  ]);
+  quarterlyGoals: Signal<QuarterlyGoalData[]> = computed(() => {
+    const goals = this.quarterlyGoalStore.selectEntities([['__userId', '==', this.authStore.user()?.__id]], { orderBy: 'order' });
+
+    return goals.map(qg => {
+      let weeklyGoals = this.weeklyGoalStore.selectEntities([['__quarterlyGoalId', '==', qg.__id]], {});
+      let weeklyGoalsTotal = 0;
+      let weeklyGoalsComplete = 0;
+      for (const wg of weeklyGoals) {
+        weeklyGoalsTotal++;
+        if (wg.completed) weeklyGoalsComplete++;
+      }
+
+      return {
+        ...qg,
+        hashtag: this.hashtagStore.selectEntity(qg.__hashtagId),
+        weeklyGoalsTotal,
+        weeklyGoalsComplete,
+      };
+    });
+  });
 
   /** For storing the dialogRef in the opened modal. */
   dialogRef: MatDialogRef<any>;
@@ -152,20 +100,65 @@ export class WeeklyGoalsComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
   
   // --------------- EVENT HANDLING ----------------------
+  async saveWeeklyGoals(allGoals: FormArray): Promise<void> {
+    const userId = this.authStore.user()?.__id;
+    if (!userId) return;
   
-  /** Displays a snackbar when the goal checkbox changes. */
-  showSnackbar(goal: WeeklyGoalData): void {
-      this.snackBar.open(
-        goal.completed ? 'Marked goal as complete' : 'Marked goal as incomplete',
-        '',
-        {
-          duration: 3000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'center',
+    await this.batchWriteService.batchWrite(
+      async (batchConfig) => {
+        const ops: Promise<void>[] = [];
+  
+        allGoals.controls.forEach((ctrl, index) => {
+          const v = ctrl.value;
+  
+          // 1. brand-new goal the user added
+          if (v._new && !v._deleted) {
+            ops.push(this.weeklyGoalStore.add(
+              {
+                __userId: userId,
+                __quarterlyGoalId: v.__quarterlyGoalId,
+                text: v.text,
+                completed: false,
+                order: index + 1,
+              },
+              { batchConfig },
+            ));
+  
+          // 2. existing goal the user deleted
+          } else if (v._deleted && !v._new) {
+            ops.push(this.weeklyGoalStore.remove(v.__weeklyGoalId, { batchConfig }));
+  
+          // 3. existing goal that changed (text edited, or reordered via drag)
+          } else if (ctrl.dirty && !v._new && !v._deleted) {
+            ops.push(this.weeklyGoalStore.update(
+              v.__weeklyGoalId,
+              { text: v.text, order: index + 1, __quarterlyGoalId: v.__quarterlyGoalId },
+              { batchConfig },
+            ));
+          }
+        });
+  
+        await Promise.all(ops);
+      },
+      {
+        snackBarConfig: {
+          successMessage: 'Goals were updated',
+          failureMessage: 'Could not update goals',
+          undoOnAction: true,
         },
+      },
     );
   }
-  
+  async toggleGoalComplete(goal: WeeklyGoalData): Promise<void> {
+    await this.weeklyGoalStore.update(
+      goal.__id,
+      { completed: !goal.completed },
+      { snackBarConfig: {
+          successMessage: goal.completed ? 'Marked goal as incomplete' : 'Marked goal as complete',
+          failureMessage: 'Could not update goal',
+      }},
+    );
+  }
   // --------------- OTHER -------------------------------
 
   /** Update weekly goals. */
@@ -177,16 +170,12 @@ export class WeeklyGoalsComponent implements OnInit {
       data: {
         goalDatas: this.quarterlyGoals(),
         incompleteGoals: this.incompleteWeeklyGoals(),
-        updateWeeklyGoals: async (weeklyGoalsFormArray) => {
+        updateWeeklyGoals: async (weeklyGoalsFormArray: FormArray) => {
           try {
-            this.snackBar.open('Goals were updated', '', {
-              duration: 3000,
-              verticalPosition: 'bottom',
-              horizontalPosition: 'center',
-            });
+            await this.saveWeeklyGoals(weeklyGoalsFormArray);
             this.dialogRef.close();
           } catch (e) {
-            console.error(e);
+            console.error(e); // failure snackbar is already handled inside batchWrite
           }
         },
       },
@@ -197,9 +186,44 @@ export class WeeklyGoalsComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-  ) { }
+  ) {}
   // --------------- LOAD AND CLEANUP --------------------
 
+  private startOfWeek(): Timestamp {
+    const now = new Date();
+    const sunday = new Date(now);
+    sunday.setDate(now.getDate() - now.getDay());
+    sunday.setHours(0, 0, 0, 0);
+    return Timestamp.fromDate(sunday);
+  }
+
   ngOnInit(): void {
+    const userId = this.authStore.user()?.__id;
+    if (!userId) return;
+
+    this.weeklyGoalStore.load(
+      [
+        ['__userId', '==', userId],
+        ['completed', '==', false],
+      ],
+      { orderBy: 'order' },
+      (g) => [
+        LoadQuarterlyGoal.create(this.quarterlyGoalStore, [['__id', '==', g.__quarterlyGoalId]], {}),
+        LoadHashtag.create(this.hashtagStore, [['__id', '==', g.__hashtagId]], {}),
+      ],
+    );
+
+    this.weeklyGoalStore.load(
+      [
+        ['__userId', '==', userId],
+        ['completed', '==', true],
+        ['completionDate', '>=', this.startOfWeek()],
+      ],
+      { orderBy: 'order' },
+      (g) => [
+        LoadQuarterlyGoal.create(this.quarterlyGoalStore, [['__id', '==', g.__quarterlyGoalId]], {}),
+        LoadHashtag.create(this.hashtagStore, [['__id', '==', g.__hashtagId]], {}),
+      ],
+    );
   }
 }

@@ -3,7 +3,7 @@
     <mat-checkbox
       class="goal-checkbox"
       [checked]="goal().completed"
-      (change)="completedChange.emit($event.checked)">
+      (change)="checkGoal()">
     </mat-checkbox>
 
     <div class="goal-content">
@@ -13,8 +13,8 @@
 
       <p
         class="goal-tag"
-        [style.color]="goal().hashtag.color">
-        #{{ goal().hashtag.name }}
+        [style.color]="goal().hashtag?.color">
+        #{{ goal().hashtag?.name }}
       </p>
     </div>
   </div>
