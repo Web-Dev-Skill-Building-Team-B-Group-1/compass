@@ -1,3 +1,17 @@
 <div class="quarterly-sidebar-item-container">
-  quarterly-sidebar-item works!
+  <div class="title">{{quarterlyGoal()?.text}}</div>
+  @for (goal of weeklyGoals(); track goal.__id){
+    <div class="goal-row">
+      <mat-checkbox class="check-box" [checked]="goal.completed" (click)="checkGoal(goal)"></mat-checkbox>
+      <input matInput class="goal-title"
+        placeholder="Placeholder" 
+        [class.completed]="goal.completed"
+        [(ngModel)]="goal.text" 
+        #model="ngModel"
+        (blur)="onBlur(goal,model)"/> 
+    </div>
+  }
+  <button class="add-button" (click)="addGoal()">
+    <div class="add">+ Add a weekly goal</div>
+  </button>
 </div>

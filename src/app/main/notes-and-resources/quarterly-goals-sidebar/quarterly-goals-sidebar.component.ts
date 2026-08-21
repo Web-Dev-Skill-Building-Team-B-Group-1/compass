@@ -3,7 +3,7 @@ import { QuarterlyGoalsSidebarAnimations } from './quarterly-goals-sidebar.anima
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
-
+import { QuarterlySidebarItemComponent } from './quarterly-sidebar-item/quarterly-sidebar-item.component';
 @Component({
   selector: 'app-quarterly-goals-sidebar',
   templateUrl: './quarterly-goals-sidebar.component.html',
@@ -11,25 +11,25 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: QuarterlyGoalsSidebarAnimations,
   standalone: true,
-  imports: [
+  imports: [QuarterlySidebarItemComponent
   ],
 })
 export class QuarterlyGoalsSidebarComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
-
+  goalId: Signal<string> = input.required<string>();
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
 
   // --------------- LOCAL UI STATE ----------------------
-
+  
   /** Loading icon. */
   loading: WritableSignal<boolean> = signal(false);
 
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
-
+  
   // --------------- OTHER -------------------------------
 
   constructor(
