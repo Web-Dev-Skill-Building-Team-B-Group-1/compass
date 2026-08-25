@@ -1,3 +1,92 @@
 <div class="onboard-weekly-goals-container">
-  onboard-weekly-goals works!
+  <div class="progress-bar-container">
+    <div class="progress-bar">
+      <div class="step completed">
+        <span class="step-title">LONG TERM GOALS</span>
+        <div class="step-indicator">
+          <div class="step-circle"></div>
+        </div>
+      </div>
+      <div class="step completed">
+        <span class="step-title">QUARTER GOALS</span>
+        <div class="step-indicator">
+          <div class="step-circle"></div>
+        </div>
+      </div>
+      <div class="step completed">
+        <span class="step-title">ORGANIZE</span>
+        <div class="step-indicator">
+          <div class="step-circle"></div>
+        </div>
+      </div>
+      <div class="step active">
+        <span class="step-title">WEEKLY GOALS</span>
+        <div class="step-indicator">
+          <div class="step-circle"></div>
+        </div>
+      </div>
+      <div class="step upcoming">
+        <span class="step-title">ORGANIZE</span>
+        <div class="step-indicator">
+          <div class="step-circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-container">
+    <div class="card-container">
+      <h1 class="title">Set some goals for this week.</h1>
+      <p class="subtitle">If applicable, link your weekly goals to your quarterly goals.</p>
+
+      <form [formGroup]="weeklyGoalsForm" (ngSubmit)="saveWeeklyGoals()" class="goals-form">
+        <div class="goal-list" cdkDropList (cdkDropListDropped)="drop($event)" formArrayName="allGoals">
+          <div *ngFor="let goal of allGoals.controls; let i = index" class="goal-row" cdkDrag [formGroupName]="i">
+            <mat-icon class="drag-handle" cdkDragHandle>drag_indicator</mat-icon>
+
+            <div class="goal-input-wrapper">
+              <input class="goal-input" placeholder="Type your goal here..." formControlName="text" />
+            </div>
+
+            <div class="goal-hashtag-wrapper" 
+                 [style.color]="getHashtagForGoal(goal.value.__quarterlyGoalId)?.color || '#8e9e98'"
+                 [style.border-bottom-color]="getHashtagForGoal(goal.value.__quarterlyGoalId)?.color || '#ffa08f'">
+              <mat-select class="hashtag-select" 
+                          [style.color]="getHashtagForGoal(goal.value.__quarterlyGoalId)?.color"
+                          placeholder="#select-quarterly-goal" 
+                          formControlName="__quarterlyGoalId">
+                <mat-option [value]="''">None</mat-option>
+                <mat-option *ngFor="let qGoal of quarterlyGoals()" [value]="qGoal.__id" [style.color]="qGoal.hashtag?.color || '#2dbdb1'">
+                  #{{ qGoal.hashtag?.name || qGoal.text }}
+                </mat-option>
+              </mat-select>
+            </div>
+
+            <!-- Custom Drag Preview while dragging -->
+            <div *cdkDragPreview class="goal-drag-preview">
+              <mat-icon class="drag-handle">drag_indicator</mat-icon>
+              <div class="goal-input-wrapper">
+                <span class="preview-text" [class.empty]="!goal.value.text">{{ goal.value.text || 'Type your goal here...' }}</span>
+              </div>
+              <div class="goal-hashtag-wrapper">
+                <div class="preview-hashtag-toggle" [style.color]="getHashtagForGoal(goal.value.__quarterlyGoalId)?.color || '#f67262'" [class.empty]="!goal.value.__quarterlyGoalId">
+                  <span class="preview-hashtag-text">
+                    {{ getHashtagForGoal(goal.value.__quarterlyGoalId) ? ('#' + getHashtagForGoal(goal.value.__quarterlyGoalId)?.name) : '#select-quarterly-goal' }}
+                  </span>
+                  <span class="preview-arrow">▼</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Drag Placeholder for drop slot -->
+            <div *cdkDragPlaceholder class="goal-drag-placeholder"></div>
+          </div>
+        </div>
+
+        <div class="actions-container">
+          <button type="button" class="btn-back">Back</button>
+          <button type="submit" class="btn-next" [disabled]="loading()">Next</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
