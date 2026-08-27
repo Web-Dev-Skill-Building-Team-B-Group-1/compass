@@ -7,9 +7,9 @@
     "module": "ES2022",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "allowJs": true,
+    "allowJs": false,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"],
+    "types": ["node", "jasmine"],
     "outDir": "./out-tsc/spec"
   },
   "include": [

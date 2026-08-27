@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: QuarterlyGoalsAnimations,
   standalone: true,
-  imports: [QuarterlyGoalsItemComponent
+  imports: [QuarterlyGoalsItemComponent,
   ],
 })
 export class QuarterlyGoalsComponent implements OnInit {
@@ -24,7 +24,7 @@ export class QuarterlyGoalsComponent implements OnInit {
   currentUser: Signal<User> = this.authStore.user;
 
   // --------------- LOCAL UI STATE ----------------------
-    incompleteWeeklyGoals: WeeklyGoalData[] = [
+  incompleteWeeklyGoals: WeeklyGoalData[] = [
     {
       __id: 'wg1',
       __userId: 'test-user',
@@ -116,7 +116,7 @@ export class QuarterlyGoalsComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

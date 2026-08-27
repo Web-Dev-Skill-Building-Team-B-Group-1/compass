@@ -1,4 +1,3 @@
-import { defineConfig, globalIgnores } from "eslint/config";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
@@ -12,20 +11,25 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
-export default defineConfig([
+export default [
   // Global ignore
-  globalIgnores(["projects/**/*"]),
+  { ignores: ["projects/**/*"] },
 
-  // TypeScript files
+  // Extends block mapped to ts files
+  ...compat.extends(
+    "plugin:@angular-eslint/recommended",
+    "plugin:@angular-eslint/template/process-inline-templates",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "google"
+  ).map(config => ({
+    ...config,
+    files: ["**/*.ts"]
+  })),
+
+  // TypeScript files config
   {
     files: ["**/*.ts"],
-    extends: compat.extends(
-      "plugin:@angular-eslint/recommended",
-      "plugin:@angular-eslint/template/process-inline-templates",
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "google"
-    ),
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: "module",
@@ -94,4 +98,4 @@ export default defineConfig([
       "@typescript-eslint/no-explicit-any": "off"
     }
   },
-]);
+];

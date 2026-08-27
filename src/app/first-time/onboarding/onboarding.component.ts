@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
 import { OnboardingAnimations } from './onboarding.animations';
-import { User } from 'src/app/core/store/user/user.model';
+import { User, OnboardingState } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
+import { OrganizeQuarterlyGoalsComponent } from './step-pages/organize-quarterly-goals/organize-quarterly-goals.component';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 
 @Component({
@@ -11,15 +12,18 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   animations: OnboardingAnimations,
+  imports: [
+    OrganizeQuarterlyGoalsComponent,
+  ],
 })
 export class OnboardingComponent implements OnInit {
   authStore = inject(AuthStore);
-  
+
   // --------------- INPUTS AND OUTPUTS ------------------
 
   /** The currently signed in user. */
   currentUser: Signal<User> = this.authStore.user;
-  
+
   // --------------- LOCAL UI STATE ----------------------
 
   // --------------- COMPUTED DATA -----------------------
@@ -35,7 +39,7 @@ export class OnboardingComponent implements OnInit {
   }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit() {
   }
 }

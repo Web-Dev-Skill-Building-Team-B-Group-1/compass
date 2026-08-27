@@ -1,3 +1,44 @@
 <div class="onboarding-container">
-   <div>add onboarding flow here!</div>
+  <!-- @if (isLoading()) {
+    <div class="onboarding-loading-state">
+      <div class="loading-spinner-wrapper" role="progressbar" aria-label="Loading onboarding data">
+        <span class="loading-spinner"></span>
+      </div>
+      <p class="loading-text">Loading onboarding...</p>
+    </div>
+  } @else if (isTimeout()) {
+    <div class="onboarding-timeout-state">
+      <h2 class="timeout-title">Onboarding is taking a bit long to load...</h2>
+      <p class="timeout-message">There might be a connection issue. Would you like to try again or sign out?</p>
+      <div class="timeout-actions">
+        <button type="button" class="btn btn-outline" (click)="retryLoad()">Retry</button>
+        <button type="button" class="btn btn-solid" (click)="signOut()">Sign Out</button>
+      </div>
+    </div>
+  } @else {
+    <app-progress-bar [activeStepIndex]="activeStepIndex()"></app-progress-bar>
+
+    <div class="step-page-container">
+      @if (onboardingState() === 'welcome') {
+        <app-initial-page></app-initial-page>
+      } @else if (onboardingState() === 'step 1') {
+        <app-onboard-long-term-goals></app-onboard-long-term-goals>
+      } @else if (onboardingState() === 'step 2') {
+        <app-onboard-long-term-transition></app-onboard-long-term-transition>
+      } @else if (onboardingState() === 'step 3') {
+        <app-onboard-quarterly-goals></app-onboard-quarterly-goals>
+      } @else if (onboardingState() === 'step 4') {
+        <app-organize-quarterly-goals 
+          [loading]="loading()"
+          (next)="goNextStep()"
+          (back)="goBackStep()">
+        </app-organize-quarterly-goals>
+      } @else if (onboardingState() === 'step 5' || onboardingState() === 'step 6' || onboardingState() === 'step 7') {
+        <app-onboard-weekly-goals></app-onboard-weekly-goals>
+      } @else if (onboardingState() === 'done') {
+        <app-final-page></app-final-page>
+      }
+    </div>
+  } -->
+  <app-organize-quarterly-goals></app-organize-quarterly-goals>
 </div>

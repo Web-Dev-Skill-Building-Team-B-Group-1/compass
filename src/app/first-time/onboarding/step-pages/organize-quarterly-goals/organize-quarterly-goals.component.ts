@@ -14,21 +14,37 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   imports: [
   ],
 })
-export class OrganizeQuarterlyGoalsComponent implements OnInit {
-  readonly authStore = inject(AuthStore);
+export class OrganizeQuarterlyGoalsComponent {
   // --------------- INPUTS AND OUTPUTS ------------------
 
-  /** The current signed in user. */
-  currentUser: Signal<User> = this.authStore.user;
+  /** Loading indicator state to disable action buttons. */
+  loading = input<boolean>(false);
+
+  /** Emits when user clicks next step button. */
+  next = output<void>();
+
+  /** Emits when user clicks back step button. */
+  back = output<void>();
 
   // --------------- LOCAL UI STATE ----------------------
-
-  /** Loading icon. */
-  loading: WritableSignal<boolean> = signal(false);
 
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
+
+  /** Triggered on next action click. */
+  onNext(): void {
+    if (!this.loading()) {
+      this.next.emit();
+    }
+  }
+
+  /** Triggered on back action click. */
+  onBack(): void {
+    if (!this.loading()) {
+      this.back.emit();
+    }
+  }
 
   // --------------- OTHER -------------------------------
 
@@ -38,7 +54,7 @@ export class OrganizeQuarterlyGoalsComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

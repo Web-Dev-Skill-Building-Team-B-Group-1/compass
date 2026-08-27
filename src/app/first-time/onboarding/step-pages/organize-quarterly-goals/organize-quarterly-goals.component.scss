@@ -1,7 +1,145 @@
 :host {
   display: block;
-  .organize-quarterly-goals-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+  width: 100%;
+}
+
+.organize-card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 77px;
+  width: 100%;
+}
+
+.organize-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 0px 5px 0px #C8E0D440;
+  width: 100%;
+  max-width: 945px;
+  padding: 90px 28px 38px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(38, 166, 154, 0.12);
   }
 }
+
+.logo-image {
+  margin-bottom: 10px;
+  height: 163px;
+  width: 163px;
+}
+
+.organize-title {
+  font-family: "Oxygen";
+  color: #4B5853;
+  font-size: 45px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.organize-description {
+  font-family: "Oxygen";
+  color: #4B5853;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 100%;
+  max-width: 505px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.organize-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+  gap: 16px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.btn {
+  font-family: "Oxygen";
+  font-size: 22px;
+  font-weight: 400;
+  padding: 8px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  outline: none;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid #2DBDB1;
+  color: #2DBDB1;
+
+  &:hover:not(:disabled) {
+    background: rgba(38, 166, 154, 0.05);
+  }
+}
+
+.btn-solid {
+  background: #2DBDB1;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(38, 166, 154, 0.2);
+
+  &:hover:not(:disabled) {
+    background: #00897b;
+    box-shadow: 0 6px 16px rgba(38, 166, 154, 0.3);
+  }
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// @media (max-width: 480px) {
+//   .organize-card {
+//     padding: 32px 20px;
+//   }
+
+//   .organize-title {
+//     font-size: 26px;
+//   }
+
+//   .organize-description {
+//     font-size: 14px;
+//   }
+
+//   .organize-actions {
+//     flex-direction: column-reverse;
+//     width: 100%;
+
+//     .btn {
+//       width: 100%;
+//     }
+//   }
+// }

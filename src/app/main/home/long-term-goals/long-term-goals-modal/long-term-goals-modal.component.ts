@@ -38,7 +38,7 @@ export class LongTermGoalsModalComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }
