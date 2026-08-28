@@ -38,7 +38,7 @@ export class OnboardQuarterlyGoalsComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

@@ -29,9 +29,9 @@ import { FormArray } from '@angular/forms';
     WeeklyGoalsItemComponent,
     CdkDropList,
     CdkDrag,
-    CdkDragHandle
-  ]
-  
+    CdkDragHandle,
+  ],
+
 })
 export class WeeklyGoalsComponent implements OnInit {
   private readonly authStore = inject(AuthStore);
@@ -52,7 +52,7 @@ export class WeeklyGoalsComponent implements OnInit {
       ],
       { orderBy: 'order' },
     );
-    return goals.map(g => ({
+    return goals.map((g) => ({
       ...g,
       hashtag: this.hashtagStore.selectEntity(g.__hashtagId),
     }));
@@ -68,7 +68,7 @@ export class WeeklyGoalsComponent implements OnInit {
       ],
       { orderBy: 'order' },
     );
-    return goals.map(g => ({
+    return goals.map((g) => ({
       ...g,
       hashtag: this.hashtagStore.selectEntity(g.__hashtagId),
     }));
@@ -77,8 +77,8 @@ export class WeeklyGoalsComponent implements OnInit {
   quarterlyGoals: Signal<QuarterlyGoalData[]> = computed(() => {
     const goals = this.quarterlyGoalStore.selectEntities([['__userId', '==', this.authStore.user()?.__id]], { orderBy: 'order' });
 
-    return goals.map(qg => {
-      let weeklyGoals = this.weeklyGoalStore.selectEntities([['__quarterlyGoalId', '==', qg.__id]], {});
+    return goals.map((qg) => {
+      const weeklyGoals = this.weeklyGoalStore.selectEntities([['__quarterlyGoalId', '==', qg.__id]], {});
       let weeklyGoalsTotal = 0;
       let weeklyGoalsComplete = 0;
       for (const wg of weeklyGoals) {
@@ -96,22 +96,23 @@ export class WeeklyGoalsComponent implements OnInit {
   });
 
   /** For storing the dialogRef in the opened modal. */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dialogRef: MatDialogRef<any>;
 
   // --------------- COMPUTED DATA -----------------------
-  
+
   // --------------- EVENT HANDLING ----------------------
   async saveWeeklyGoals(allGoals: FormArray): Promise<void> {
     const userId = this.authStore.user()?.__id;
     if (!userId) return;
-  
+
     await this.batchWriteService.batchWrite(
       async (batchConfig) => {
         const ops: Promise<void>[] = [];
-  
+
         allGoals.controls.forEach((ctrl, index) => {
           const v = ctrl.value;
-  
+
           // 1. brand-new goal the user added
           if (v._new && !v._deleted) {
             ops.push(this.weeklyGoalStore.add(
@@ -124,11 +125,11 @@ export class WeeklyGoalsComponent implements OnInit {
               },
               { batchConfig },
             ));
-  
+
           // 2. existing goal the user deleted
           } else if (v._deleted && !v._new) {
             ops.push(this.weeklyGoalStore.remove(v.__weeklyGoalId, { batchConfig }));
-  
+
           // 3. existing goal that changed (text edited, or reordered via drag)
           } else if (ctrl.dirty && !v._new && !v._deleted) {
             ops.push(this.weeklyGoalStore.update(
@@ -138,7 +139,7 @@ export class WeeklyGoalsComponent implements OnInit {
             ));
           }
         });
-  
+
         await Promise.all(ops);
       },
       {
@@ -155,9 +156,9 @@ export class WeeklyGoalsComponent implements OnInit {
       goal.__id,
       { completed: !goal.completed },
       { snackBarConfig: {
-          successMessage: goal.completed ? 'Marked goal as incomplete' : 'Marked goal as complete',
-          failureMessage: 'Could not update goal',
-      }},
+        successMessage: goal.completed ? 'Marked goal as incomplete' : 'Marked goal as complete',
+        failureMessage: 'Could not update goal',
+      } },
     );
   }
   // --------------- OTHER -------------------------------

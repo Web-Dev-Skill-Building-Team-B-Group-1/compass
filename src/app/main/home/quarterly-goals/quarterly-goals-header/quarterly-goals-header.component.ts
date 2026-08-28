@@ -38,7 +38,7 @@ export class QuarterlyGoalsHeaderComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

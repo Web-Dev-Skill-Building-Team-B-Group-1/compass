@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector, OutputEmitterRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector, OutputEmitterRef } from '@angular/core';
 import { LongTermGoalsHeaderAnimations } from './long-term-goals-header.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
@@ -31,7 +31,7 @@ export class LongTermGoalsHeaderComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
-  editGoals(){
+  editGoals() {
     this.editClicked.emit(true);
   }
 
@@ -43,7 +43,7 @@ export class LongTermGoalsHeaderComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

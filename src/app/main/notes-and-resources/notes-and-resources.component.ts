@@ -12,14 +12,14 @@ import { NotesHeaderComponent } from './notes-header/notes-header.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: NotesAndResourcesAnimations,
   standalone: true,
-  imports: [ NotesHeaderComponent
+  imports: [NotesHeaderComponent,
   ],
 })
 export class NotesAndResourcesComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
 
-  /** 
+  /**
    * Route parameter value representing what goal we're taking notes on.
    * IMPORTANT: This can be either an id for a long term goal or quarterly goal,
    * which will significantly impact the UI and your queries!
@@ -46,7 +46,7 @@ export class NotesAndResourcesComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

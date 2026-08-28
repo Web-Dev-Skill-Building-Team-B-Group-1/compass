@@ -1,3 +1,21 @@
-<div class="organize-quarterly-goals-container">
-  organize-quarterly-goals works!
-</div>
+<main class="organize-card-wrapper">
+  <div class="organize-card">
+    <img class="logo-image" src="/images/logo.svg" alt="logo" />
+    <h1 class="organize-title">One step at a time.</h1>
+    <p class="organize-description">
+      Weekly planning will keep you on track to achieve your goals. Start with three goals for the week.
+    </p>
+    <div class="organize-actions">
+      <button type="button" class="btn btn-outline" (click)="onBack()" [disabled]="loading()">
+        Back
+      </button>
+      <button type="button" class="btn btn-solid" (click)="onNext()" [disabled]="loading()">
+        @if (loading()) {
+        <span class="spinner"></span>
+        } @else {
+        Next
+        }
+      </button>
+    </div>
+  </div>
+</main>
