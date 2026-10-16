@@ -1,7 +1,30 @@
 :host {
   display: block;
   .quarterly-goals-sidebar-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    background-color: #F2FFFE;
+    
+    .quarterly-sidebar-item-title {
+      color: #5A5A5A;
+      font-family: Oxygen;
+      font-size: 18.75px;
+      font-weight: 700;
+      padding: 12px 0px;
+      border-bottom: 1.5px solid #00000026;
+    }
+    .goals-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .add-goal {
+      display: flex;
+      background: none;
+      border: none;
+      color: #5A5A5A;
+      font-family: Oxygen;
+      font-size: 17.5px;
+      padding: 12px 0px 12px 0px;
+    }
   }
 }

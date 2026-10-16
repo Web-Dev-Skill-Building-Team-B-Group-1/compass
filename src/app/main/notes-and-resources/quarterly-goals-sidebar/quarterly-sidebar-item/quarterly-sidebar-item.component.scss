@@ -1,7 +1,25 @@
 :host {
   display: block;
   .quarterly-sidebar-item-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1.5px solid #00000026;
+  
+    .item-container {
+      display: flex;
+      .checkbox {
+        margin-left:-10px;
+        margin-top: 4.9px;
+      }
+      .item-text {
+        color: #5A5A5A;
+        font-family: Oxygen;
+        font-size: 16.25px;
+        padding: 11.25px 0px;
+      }
+      .strikethrough {
+        text-decoration: line-through;
+      }
+    }
   }
 }

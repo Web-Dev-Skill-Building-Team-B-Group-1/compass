@@ -1,3 +1,9 @@
 <div class="quarterly-sidebar-item-container">
-  quarterly-sidebar-item works!
+  <div class="item-container">
+    <mat-checkbox class="checkbox" [checked]="goal().completed"
+    (click)="checkGoal()"></mat-checkbox>
+    <span class="item-text" [class.strikethrough]="goal().completed">
+      {{goal().text}}
+    </span>
+  </div>
 </div>

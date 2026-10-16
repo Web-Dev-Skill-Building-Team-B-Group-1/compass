@@ -22,3 +22,7 @@ export interface WeeklyGoalInForm {
   _deleted?: boolean;
   _new?: boolean;
 }
+
+export interface QuarterlyData extends QuarterlyGoal {
+  weeklyGoals: WeeklyGoalData[]
+}

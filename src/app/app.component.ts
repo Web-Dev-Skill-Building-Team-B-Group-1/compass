@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     window.parent.postMessage({ type: 'angular-ready' }, '*');
+    await this.authStore.login('google.com', { doNotRoute: true });
     this.authStore.loadAuth();
   }
 }
