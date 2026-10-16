@@ -1,15 +1,15 @@
 <div class="notes-header-container">
   <div class="top-bar">
-    <div class="title">
+  <div class="title">
       Notes and resources
-    </div>
-    <button class="close-btn" (click)="close()" aria-label="Close notes and resources">
-      <img class="close-icon" src="/images/close-x.svg" alt="Close" />
-    </button>
+  </div>
+  <button class="close-btn" (click)="close()" aria-label="Close notes and resources">
+    <img class="close-icon" src="/images/close-x.svg" alt="Close" />
+  </button>
     @if (hashtag()) {
       <div class="hashtag-filter-chip">
         <span class="hashtag-filter-text">
-          For <span class="hashtag-name" [style.color]="hashtag().color">#{{ hashtag().name }}</span>
+          For <span class="hashtag-name" [style.color]="hashtag()?.color">#{{ hashtag()?.name }}</span>
         </span>
       </div>
     }

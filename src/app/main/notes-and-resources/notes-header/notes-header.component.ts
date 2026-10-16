@@ -10,6 +10,9 @@ import { QuarterlyGoalStore } from 'src/app/core/store/quarterly-goal/quarterly-
 import { Hashtag } from 'src/app/core/store/hashtag/hashtag.model';
 import { HashtagStore, LoadHashtag } from 'src/app/core/store/hashtag/hashtag.store';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { LongTermGoalsHeaderComponent } from '../../home/long-term-goals/long-term-goals-header/long-term-goals-header.component';
 @Component({
   selector: 'app-notes-header',
   templateUrl: './notes-header.component.html',
@@ -17,7 +20,7 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: NotesHeaderAnimations,
   standalone: true,
-  imports: [
+  imports: [LongTermGoalsHeaderComponent,
   ],
 })
 export class NotesHeaderComponent implements OnInit {
@@ -51,7 +54,13 @@ export class NotesHeaderComponent implements OnInit {
   // --------------- EVENT HANDLING ----------------------
   
   close(): void {
+      this.snackBar.open('Close button clicked!', '', {
+      duration: 1000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'center',
+    });
     this.router.navigate(['/home']);
+    
   }
   
   // --------------- OTHER -------------------------------
@@ -59,7 +68,10 @@ export class NotesHeaderComponent implements OnInit {
   constructor(
     private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
+    private snackBar: MatSnackBar,
   ) { }
+
+
   
   // --------------- LOAD AND CLEANUP --------------------
   

@@ -33,6 +33,7 @@ export class NotesAndResourcesComponent implements OnInit {
 
   /** Loading icon. */
   loading: WritableSignal<boolean> = signal(false);
+   
 
   // --------------- COMPUTED DATA -----------------------
 
