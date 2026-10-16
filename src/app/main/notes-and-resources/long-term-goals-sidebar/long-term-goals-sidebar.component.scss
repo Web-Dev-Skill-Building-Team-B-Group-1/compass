@@ -1,7 +1,37 @@
 :host {
   display: block;
   .long-term-goals-sidebar-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    background-color: #F2FFFE;
+    max-width: 335px;
+    
+  }
+  .title{
+    margin: 0;
+    font-size: 18.75px;
+    font-weight: 700;
+    font-family: 'Oxygen';
+    color: #5A5A5A;
+    border-bottom: 1.25px solid #00000026;
+  }
+  .title-text{
+    position: relative;
+    top: -6px;
+  }
+
+  .goal-list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .goal{
+    padding: 12.5px 8px;
+    border-bottom: 1px solid #d9d9d9;
+    font-size: 16.25px;
+    font-weight: 400;
+    font-family: 'Oxygen';
+    color: #5A5A5A;
   }
 }
