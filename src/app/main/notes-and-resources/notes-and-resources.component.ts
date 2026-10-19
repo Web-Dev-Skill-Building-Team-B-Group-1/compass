@@ -4,6 +4,10 @@ import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 import { NotesHeaderComponent } from './notes-header/notes-header.component';
+import { Router } from '@angular/router';
+
+
+import { LongTermGoalsSidebarComponent } from './long-term-goals-sidebar/long-term-goals-sidebar.component';
 
 @Component({
   selector: 'app-notes-and-resources',
@@ -12,13 +16,13 @@ import { NotesHeaderComponent } from './notes-header/notes-header.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: NotesAndResourcesAnimations,
   standalone: true,
-  imports: [ NotesHeaderComponent
+  imports: [ NotesHeaderComponent, LongTermGoalsSidebarComponent,
   ],
 })
 export class NotesAndResourcesComponent implements OnInit {
   readonly authStore = inject(AuthStore);
+  readonly router = inject(Router);
   // --------------- INPUTS AND OUTPUTS ------------------
-
   /** 
    * Route parameter value representing what goal we're taking notes on.
    * IMPORTANT: This can be either an id for a long term goal or quarterly goal,
