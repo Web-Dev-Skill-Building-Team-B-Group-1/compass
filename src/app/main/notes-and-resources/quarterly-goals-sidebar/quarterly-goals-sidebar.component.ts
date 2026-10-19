@@ -68,8 +68,9 @@ export class QuarterlyGoalsSidebarComponent implements OnInit {
   // --------------- EVENT HANDLING ----------------------
   
   checkGoal(goal: WeeklyGoalData) {
+    goal.completed = !goal.completed;
     this.snackBar.open(
-      goal.completed ? 'Marked goal as incomplete' : 'Marked goal as complete',
+      goal.completed ? 'Marked goal as complete' : 'Marked goal as incomplete',
       '',
       {
         duration: 3000,
