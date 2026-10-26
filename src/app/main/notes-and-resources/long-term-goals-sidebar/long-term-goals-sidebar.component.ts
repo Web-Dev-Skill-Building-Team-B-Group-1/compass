@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector } from '@angular/core';
 import { LongTermGoalsSidebarAnimations } from './long-term-goals-sidebar.animations';
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
@@ -11,14 +11,13 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: LongTermGoalsSidebarAnimations,
   standalone: true,
-  imports: [
-  ],
-})
-export class LongTermGoalsSidebarComponent implements OnInit {
+  imports: [],
+  })
+export class LongTermGoalsSidebarComponent {
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
 
-  /** The current signed in user. */
+  /** The current signed-in user. */
   currentUser: Signal<User> = this.authStore.user;
 
   // --------------- LOCAL UI STATE ----------------------
@@ -32,13 +31,7 @@ export class LongTermGoalsSidebarComponent implements OnInit {
 
   // --------------- OTHER -------------------------------
 
-  constructor(
-    private injector: Injector,
-    @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
-  ) { }
-
   // --------------- LOAD AND CLEANUP --------------------
+
   
-  ngOnInit(): void {
-  }
 }

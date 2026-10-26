@@ -4,7 +4,7 @@ import { OnboardingState } from '../user/user.model';
 
 export const AuthMockDB = signalStore(
   { providedIn: 'root' },
-  withState({ user: null }),
+  withState({ user: JSON.parse(localStorage.getItem('mockUser')) }),
   withMethods((store) => ({
     login() {
       patchState(store, { user: {
@@ -14,9 +14,11 @@ export const AuthMockDB = signalStore(
         photoURL: USER_DB[0].photoURL,
         onboardingState: USER_DB[0].onboardingState
       } });
+      localStorage.setItem('mockUser', JSON.stringify(store.user()));
     },
     logout() {
       patchState(store, { user: null });
+      localStorage.removeItem('mockUser');
     },
   })),
 );
