@@ -18,6 +18,7 @@ export class NotesHeaderComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
 
+  goalId: Signal<string> = input.required<string>();
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
 

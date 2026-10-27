@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, output, OutputEmitterRef} from '@angular/core';
 import { WeeklyGoalsHeaderAnimations } from './weekly-goals-header.animations';
 import { endOfWeek, startOfWeek } from 'src/app/core/utils/time.utils';
 
@@ -14,10 +14,7 @@ import { endOfWeek, startOfWeek } from 'src/app/core/utils/time.utils';
 export class WeeklyGoalsHeaderComponent implements OnInit {
   // --------------- INPUTS AND OUTPUTS ------------------
   editClicked: OutputEmitterRef<boolean> = output<boolean>();
-
-  // no input for this component – it's not needed :)
-  editClicked = output<boolean>();
-
+  
   // --------------- LOCAL UI STATE ----------------------
 
   // --------------- COMPUTED DATA -----------------------

@@ -3,6 +3,9 @@ import { LongTermGoalsSidebarAnimations } from './long-term-goals-sidebar.animat
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { JsonPipe } from '@angular/common';
+import { LongTermGoalStore } from '../../../core/store/long-term-goal/long-term-goal.store';
+import { LongTermGoal } from '../../../core/store/long-term-goal/long-term-goal.model';
 
 @Component({
   selector: 'app-long-term-goals-sidebar',
@@ -12,12 +15,14 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
   animations: LongTermGoalsSidebarAnimations,
   standalone: true,
   imports: [
+    JsonPipe,
   ],
 })
 export class LongTermGoalsSidebarComponent implements OnInit {
   readonly authStore = inject(AuthStore);
+  readonly longTermGoalStore = inject(LongTermGoalStore);
   // --------------- INPUTS AND OUTPUTS ------------------
-
+  
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
 
@@ -28,6 +33,11 @@ export class LongTermGoalsSidebarComponent implements OnInit {
 
   // --------------- COMPUTED DATA -----------------------
 
+  /** Retrieve long term goal for the user from the store */
+  longTermGoal: Signal<LongTermGoal> = computed(() => {
+    return this.longTermGoalStore.selectFirst([['__userId', '==', this.currentUser()?.__id]], {});
+  });
+  
   // --------------- EVENT HANDLING ----------------------
 
   // --------------- OTHER -------------------------------
@@ -38,7 +48,9 @@ export class LongTermGoalsSidebarComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
-  ngOnInit(): void {
+
+  /** Loading long term goal for the current user into the store */
+  ngOnInit() {
+    this.longTermGoalStore.load([['__userId', '==', this.currentUser()?.__id]], {});
   }
 }
