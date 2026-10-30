@@ -27,7 +27,7 @@ export class QuarterlySidebarItemComponent implements OnInit {
 
   /** Input for weekly goal data */
   goal: Signal<WeeklyGoalData> = input<WeeklyGoalData>();
-  /** Boolean output event for if the checkbox is selected or not*/
+  /** Output event for checkbox with type WeeklyGoalData for the associated weekly goal to be emitted*/
   checked: OutputEmitterRef<WeeklyGoalData> = output<WeeklyGoalData>();
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
