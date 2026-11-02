@@ -1,3 +1,11 @@
 <div class="quarterly-goals-sidebar-container">
-  quarterly-goals-sidebar works!
+  <div class="quarterly-sidebar-item-title">
+    {{ data.text }}
+  </div>
+  <div class="goals-list">
+    @for (goal of data.weeklyGoals; track goal.__id) {
+      <app-quarterly-sidebar-item [goal]="goal" (checked)="checkGoal($event)"/>
+    }
+  </div>
+  <button class="add-goal" (click)="addGoal()">+ Add a weekly goal</button>
 </div>
