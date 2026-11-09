@@ -33,6 +33,7 @@
     "crypto-es": "^2.1.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.32.0",
+    "firebase": "^13.2.0",
     "globalthis": "^1.0.4",
     "husky": "^9.1.7",
     "lint-staged": "^17.3.0",
