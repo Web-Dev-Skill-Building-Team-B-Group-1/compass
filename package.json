@@ -60,5 +60,15 @@
     "src/**/*.{ts,html}": [
       "eslint --fix"
     ]
+  },
+  "allowScripts": {
+    "@firebase/util@1.15.3": true,
+    "core-js@3.50.0": true,
+    "fsevents@2.3.3": true,
+    "lmdb@3.0.13": true,
+    "msgpackr-extract@3.0.4": true,
+    "nice-napi@1.0.2": true,
+    "protobufjs@7.6.6": true,
+    "esbuild@0.21.5": true
   }
 }
