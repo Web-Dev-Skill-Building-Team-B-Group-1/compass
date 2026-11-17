@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector, LOCALE_ID} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input, output, inject, WritableSignal, Signal, signal, computed, Inject, Injector, LOCALE_ID } from '@angular/core';
 import { formatDate, DatePipe } from '@angular/common';
 import { DateTimeAnimations } from './date-time.animations';
 import { User } from 'src/app/core/store/user/user.model';
@@ -15,7 +15,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: DateTimeAnimations,
   standalone: true,
-  imports: [ DatePipe],
+  imports: [DatePipe],
 })
 export class DateTimeComponent implements OnInit {
   readonly authStore = inject(AuthStore);
@@ -32,22 +32,22 @@ export class DateTimeComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
 
   formattedDate: string = '';
-  
+
   // --------------- EVENT HANDLING ----------------------
 
-  timeSet: Signal<Date> = toSignal(interval(1000).pipe(map(()=>new Date())), {initialValue:new Date()} );
-  
-  
+  timeSet: Signal<Date> = toSignal(interval(1000).pipe(map(()=>new Date())), { initialValue: new Date() } );
+
+
   // --------------- OTHER -------------------------------
 
   constructor(
     private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
-    @Inject(LOCALE_ID) private locale: string  
-    ) { }
+    @Inject(LOCALE_ID) private locale: string,
+  ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
     const currentDate = new Date();
     this.formattedDate = formatDate(currentDate, 'MMMM d, y', this.locale);
