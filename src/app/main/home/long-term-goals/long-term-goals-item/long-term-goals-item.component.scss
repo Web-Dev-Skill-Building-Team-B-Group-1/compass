@@ -3,7 +3,7 @@
 }
 
 .long-term-goals-item-container {
-  width: 387px;
+  max-width: 387px;
   padding: 16px;
   background: #ffffff;
 }
@@ -20,4 +20,5 @@
   font-size: 16.25px;
   font-weight: 400;
   color: #4B5853;
+  border-bottom: 1px solid #E5E5E5;
 }

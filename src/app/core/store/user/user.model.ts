@@ -14,6 +14,14 @@ export interface User {
     [index: string]: any;
   };
   onboardingState: OnboardingState;
+  accessState?: AccessState; // used by the admin panel
+}
+
+export enum AccessState {
+  CONSENT = '01 - consent', // on consent form
+  SUBMIT_INTEREST = '02 - submit interest', // on basic interest form
+  WAITING = '03 - waiting', // on waitlist for early access
+  DONE = 'done', // finished with the access flow
 }
 
 export enum OnboardingState {
