@@ -1,7 +1,7 @@
 :host {
   display: block;
   .long-term-goals-header-container {
-    width: 387px;
+    max-width: 387px;
     height: 80px;
     background-color: #ffff;
     font-family: Oxygen;
@@ -15,10 +15,13 @@
       height: 100%;
       .long-term-goals-header-title {
         height: 29px;
-        width: 290px;
+        max-width: 290px;
         font-size: 28px;
         color: #4B5853;
-        display: flex;  
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .edit-button {
         cursor: pointer;
