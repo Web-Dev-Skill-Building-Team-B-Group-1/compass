@@ -4,6 +4,7 @@ import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
 import { NotesHeaderComponent } from './notes-header/notes-header.component';
+import { QuarterlyGoalsSidebarComponent } from './quarterly-goals-sidebar/quarterly-goals-sidebar.component';
 
 @Component({
   selector: 'app-notes-and-resources',
@@ -12,7 +13,7 @@ import { NotesHeaderComponent } from './notes-header/notes-header.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: NotesAndResourcesAnimations,
   standalone: true,
-  imports: [ NotesHeaderComponent
+  imports: [ NotesHeaderComponent, QuarterlyGoalsSidebarComponent,
   ],
 })
 export class NotesAndResourcesComponent implements OnInit {
