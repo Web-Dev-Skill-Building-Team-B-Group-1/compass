@@ -89,7 +89,7 @@ export class FirebaseService implements DatabaseService {
 
   streamEntity<T>(collectionName: string, id: string) {
     const docRef = doc(this.firestore, `${collectionName}/${id}`);
-    return docData(docRef) as Observable<T>;
+    return docData(docRef as never) as Observable<T>;
   }
 
   streamEntities<T>(collectionName, queryParams, queryOptions?) {
@@ -115,7 +115,7 @@ export class FirebaseService implements DatabaseService {
     } else {
       stateChangeObs$ = collectionChanges(
         query(collectionRef, ...this.constructQueryListRefMod(queryParams, queryOptions)),
-      ) as Observable<DocumentChange<T>[]>;
+      ) as unknown as Observable<DocumentChange<T>[]>;
     }
 
     return stateChangeObs$.pipe(

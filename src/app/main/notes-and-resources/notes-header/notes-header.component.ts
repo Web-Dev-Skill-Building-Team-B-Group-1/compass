@@ -26,43 +26,43 @@ export class NotesHeaderComponent implements OnInit {
   readonly quarterlyGoalStore = inject(QuarterlyGoalStore);
   readonly hashtagStore = inject(HashtagStore);
   readonly router = inject(Router);
-  
+
   // --------------- INPUTS AND OUTPUTS ------------------
-  
+
   goalId: Signal<string> = input.required<string>();
-  
+
   currentUser: Signal<User> = this.authStore.user;
-  
+
   // --------------- LOCAL UI STATE ----------------------
-  
+
   loading: WritableSignal<boolean> = signal(false);
-  
+
   // --------------- COMPUTED DATA -----------------------
-  
+
   longTermGoal: Signal<LongTermGoal | null> = computed(() => this.longTermGoalStore.selectEntity(this.goalId()));
-  
+
   quarterlyGoal: Signal<QuarterlyGoal | null> = computed(() => this.quarterlyGoalStore.selectEntity(this.goalId()));
-  
+
   hashtag: Signal<Hashtag | null> = computed(() => {
     const goal = this.quarterlyGoal();
     return goal ? this.hashtagStore.selectEntity(goal.__hashtagId) : null;
   });
-  
+
   // --------------- EVENT HANDLING ----------------------
-  
+
   close(): void {
     this.router.navigate(['/home']);
   }
-  
+
   // --------------- OTHER -------------------------------
-  
+
   constructor(
     private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
   ) { }
-  
+
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
     this.longTermGoalStore.load(
       [['__id', '==', this.goalId()]],

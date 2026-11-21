@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: true,
   imports: [
     LongTermGoalsHeaderComponent,
-    LongTermGoalsItemComponent
+    LongTermGoalsItemComponent,
   ],
 })
 export class LongTermGoalsComponent implements OnInit {
@@ -27,7 +27,7 @@ export class LongTermGoalsComponent implements OnInit {
 
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
-  
+
   sampleData = signal<LongTermGoal>({
     __id: 'ltg1',
     __userId: 'test-user',
@@ -49,8 +49,8 @@ export class LongTermGoalsComponent implements OnInit {
   // --------------- COMPUTED DATA -----------------------
 
   // --------------- EVENT HANDLING ----------------------
-  
-  openModal( editClicked: boolean){
+
+  openModal( editClicked: boolean) {
     this.snackBar.open(
       'Clicked to edit',
       '',
@@ -71,7 +71,7 @@ export class LongTermGoalsComponent implements OnInit {
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }

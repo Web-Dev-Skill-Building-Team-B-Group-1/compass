@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, OutputEmitterRef, Signal, input, output} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, OutputEmitterRef, Signal, input, output } from '@angular/core';
 import { WeeklyGoalsItemAnimations } from './weekly-goals-item.animations';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -18,7 +18,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
 })
 export class WeeklyGoalsItemComponent implements OnInit {
-
   // --------------- INPUTS AND OUTPUTS ------------------
 
   goal: Signal<WeeklyGoalData> = input<WeeklyGoalData>();

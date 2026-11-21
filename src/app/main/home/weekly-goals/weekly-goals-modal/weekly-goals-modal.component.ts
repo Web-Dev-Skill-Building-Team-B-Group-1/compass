@@ -66,7 +66,7 @@ export class WeeklyGoalsModalComponent implements OnInit {
 
   get addedGoalsCount() {
     return this.allGoals.controls.filter(
-      (goal) => goal.value._new && !goal.value._deleted
+      (goal) => goal.value._new && !goal.value._deleted,
     ).length;
   }
 
@@ -76,7 +76,7 @@ export class WeeklyGoalsModalComponent implements OnInit {
         goal.dirty &&
         goal.value.text !== goal.value.originalText &&
         !goal.value._new &&
-        !goal.value._deleted
+        !goal.value._deleted,
     ).length;
   }
 
@@ -89,22 +89,22 @@ export class WeeklyGoalsModalComponent implements OnInit {
 
   // --------------- EVENT HANDLING ----------------------
   async saveGoals() {
-      await this.data.updateWeeklyGoals(this.allGoals);
+    await this.data.updateWeeklyGoals(this.allGoals);
+  }
+
+  drop(event: CdkDragDrop<unknown>) {
+    const control = this.allGoals.at(event.previousIndex);
+    this.allGoals.removeAt(event.previousIndex);
+    this.allGoals.insert(event.currentIndex, control);
+  }
+
+  fullDelete(event: Event, index: number) {
+    const isDeleted = (event.target as HTMLInputElement).checked;
+    const goal = this.allGoals.at(index);
+    if (isDeleted && goal.value._new) {
+      this.allGoals.removeAt(index);
     }
-  
-    drop(event: CdkDragDrop<unknown>) {
-      const control = this.allGoals.at(event.previousIndex);
-      this.allGoals.removeAt(event.previousIndex);
-      this.allGoals.insert(event.currentIndex, control);
-    }
-  
-    fullDelete(event: Event, index: number) {
-      const isDeleted = (event.target as HTMLInputElement).checked;
-      const goal = this.allGoals.at(index);
-      if (isDeleted && goal.value._new) {
-        this.allGoals.removeAt(index);
-      }
-    }
+  }
   // --------------- OTHER -------------------------------
 
   addGoalToForm(goal: WeeklyGoalInForm) {
@@ -115,7 +115,7 @@ export class WeeklyGoalsModalComponent implements OnInit {
         originalText: [goal ? goal.text : ''],
         _deleted: [goal ? goal._deleted : false],
         _new: [goal ? false : true],
-      })
+      }),
     );
   }
 
