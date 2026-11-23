@@ -35,6 +35,7 @@ export class QuarterlyGoalsHeaderComponent implements OnInit {
 
   // --------------- EVENT HANDLING ----------------------
 
+  // TODO (1/2): emit the editClicked output event when the user clicks the edit button
   clickedIcon(editedGoals: boolean ) {
     this.snackBar.open('Pencil Icon Clicked',
       '',
