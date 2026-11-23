@@ -6,6 +6,7 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
 import { QuarterlyGoalsItemComponent } from './quarterly-goals-item/quarterly-goals-item.component';
 import { QuarterlyGoalData, WeeklyGoalData } from '../home.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { QuarterlyGoalsHeaderComponent } from './quarterly-goals-header/quarterly-goals-header.component';
 @Component({
   selector: 'app-quarterly-goals',
   templateUrl: './quarterly-goals.component.html',
@@ -13,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: QuarterlyGoalsAnimations,
   standalone: true,
-  imports: [QuarterlyGoalsItemComponent
+  imports: [QuarterlyGoalsItemComponent, QuarterlyGoalsHeaderComponent,
   ],
 })
 export class QuarterlyGoalsComponent implements OnInit {
@@ -24,7 +25,7 @@ export class QuarterlyGoalsComponent implements OnInit {
   currentUser: Signal<User> = this.authStore.user;
 
   // --------------- LOCAL UI STATE ----------------------
-    incompleteWeeklyGoals: WeeklyGoalData[] = [
+  incompleteWeeklyGoals: WeeklyGoalData[] = [
     {
       __id: 'wg1',
       __userId: 'test-user',
@@ -110,13 +111,13 @@ export class QuarterlyGoalsComponent implements OnInit {
   // --------------- OTHER -------------------------------
 
   constructor(
-     private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit(): void {
   }
 }
