@@ -3,8 +3,16 @@
   <div class="goal-details">
     <div class="goal-title">{{goal()?.text}}</div>
     <div class="bottom">
-      <div class ="goal-hashtag">#{{goal().hashtag?.name}}</div>
-      <div class = "incomplete"> {{goal()?.weeklyGoalsComplete}} / {{goal()?.weeklyGoalsTotal}}</div>
+      <div class="goal-hashtag">#{{goal().hashtag?.name}}</div>
+      <div class="incomplete"> {{goal()?.weeklyGoalsComplete}} / {{goal()?.weeklyGoalsTotal}}</div>
     </div>
   </div>
+  <!-- <mat-checkbox class="check-box" [checked]="goal().completed" (click)="checkGoal()"></mat-checkbox>
+  <div class="goal-details">
+    <div class="goal-title">Test Goal</div>
+    <div class="bottom">
+      <div class="goal-hashtag">#Testalicious</div>
+      <div class="incomplete"> {{goal()?.weeklyGoalsComplete}} / {{goal()?.weeklyGoalsTotal}}</div>
+    </div>
+  </div> -->
 </div>
