@@ -9,6 +9,7 @@ import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
 import { LongTermGoalsItemComponent } from './long-term-goals/long-term-goals-item/long-term-goals-item.component';
 import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.component';
 import { DateTimeComponent } from './date-time/date-time.component';
+import { WeeklyGoalsHeaderComponent } from './weekly-goals/weekly-goals-header/weekly-goals-header.component';
 
 @Component({
   selector: 'app-home',
@@ -24,16 +25,17 @@ import { DateTimeComponent } from './date-time/date-time.component';
     WeeklyGoalsComponent,
     QuarterlyGoalsComponent,
     DateTimeComponent,
+    WeeklyGoalsHeaderComponent,
   ]
 })
 export class HomeComponent implements OnInit {
   authStore = inject(AuthStore);
-  
+
   // --------------- INPUTS AND OUTPUTS ------------------
 
   /** The currently signed in user. */
   currentUser: Signal<User> = this.authStore.user;
-  
+
   // --------------- LOCAL UI STATE ----------------------
 
   // --------------- COMPUTED DATA -----------------------
@@ -49,7 +51,7 @@ export class HomeComponent implements OnInit {
   }
 
   // --------------- LOAD AND CLEANUP --------------------
-  
+
   ngOnInit() {
   }
 }
