@@ -1,3 +1,13 @@
 <div class="quarterly-goals-header-container">
-  quarterly-goals-header works!
+  <div class="header-header">
+    <div class="header-title">
+        Quarterly Goals
+    </div>
+    <button class="edit-button" (click)="clickedIcon(true)">
+      <img class="edit-icon" src="/images/edit.svg" alt="Edit" />
+    </button>
+  </div>
+  <div class="time-text">
+    {{ quarterAndYear() }}
+  </div>
 </div>

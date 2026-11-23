@@ -3,6 +3,9 @@ import { QuarterlyGoalsHeaderAnimations } from './quarterly-goals-header.animati
 import { User } from 'src/app/core/store/user/user.model';
 import { AuthStore } from 'src/app/core/store/auth/auth.store';
 import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch-write.service';
+import { getQuarterAndYear } from 'src/app/core/utils/time.utils';
+import { OutputEmitterRef } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-quarterly-goals-header',
@@ -17,6 +20,8 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
 export class QuarterlyGoalsHeaderComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   // --------------- INPUTS AND OUTPUTS ------------------
+  quarterAndYear = getQuarterAndYear;
+  editClicked: OutputEmitterRef<boolean> = output<boolean>();
 
   /** The current signed in user. */
   currentUser: Signal<User> = this.authStore.user;
@@ -30,11 +35,22 @@ export class QuarterlyGoalsHeaderComponent implements OnInit {
 
   // --------------- EVENT HANDLING ----------------------
 
+  clickedIcon(editedGoals: boolean ) {
+    this.snackBar.open('Pencil Icon Clicked',
+      '',
+      {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center',
+      },
+    );
+  }
   // --------------- OTHER -------------------------------
 
   constructor(
     private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
+    private snackBar: MatSnackBar,
   ) { }
 
   // --------------- LOAD AND CLEANUP --------------------

@@ -1,7 +1,40 @@
 :host {
   display: block;
   .quarterly-goals-header-container {
-    // REMOVE WHEN FINISHING LAYOUT STYLES
     border: 1px solid black;
+    margin-left: 35px;
+    margin-right: 35px;
+    .header-header{
+      margin-bottom: 10px;
+      display: flex;
+      .header-title {
+        overflow: hidden;
+        color: #4B5853;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: Oxygen;
+        font-size: 27.5px;
+        font-weight: 400;
+      }
+
+      .edit-button {
+        cursor: pointer;
+        margin-top: 10px;
+        background: none;
+        border: none;
+        align-self: flex-end;
+        margin-left: auto;
+        .edit-icon {
+          width: 20px;
+          height: 20px;
+        }
+      } 
+    }
+    .time-text {
+      color: #4B5853;
+      font-family: Oxygen;
+      font-size: 22.5px;
+      font-weight: 700;
+    }
   }
 }

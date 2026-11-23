@@ -6,6 +6,9 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
 import { QuarterlyGoalsItemComponent } from './quarterly-goals-item/quarterly-goals-item.component';
 import { QuarterlyGoalData, WeeklyGoalData } from '../home.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { QuarterlyGoalsHeaderComponent } from './quarterly-goals-header/quarterly-goals-header.component';
+import { QuarterlyGoalsModalComponent } from './quarterly-goals-modal/quarterly-goals-modal.component';
+
 @Component({
   selector: 'app-quarterly-goals',
   templateUrl: './quarterly-goals.component.html',
@@ -13,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: QuarterlyGoalsAnimations,
   standalone: true,
-  imports: [QuarterlyGoalsItemComponent,
+  imports: [QuarterlyGoalsItemComponent, QuarterlyGoalsHeaderComponent, QuarterlyGoalsModalComponent,
   ],
 })
 export class QuarterlyGoalsComponent implements OnInit {

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, output, OutputEmitterRef } from '@angular/core';
 import { WeeklyGoalsHeaderAnimations } from './weekly-goals-header.animations';
 import { endOfWeek, startOfWeek } from 'src/app/core/utils/time.utils';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({

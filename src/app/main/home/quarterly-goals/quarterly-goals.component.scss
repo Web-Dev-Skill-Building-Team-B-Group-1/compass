@@ -1,6 +1,12 @@
 :host {
   display: block;
   .quarterly-goals-container {
-    
+    width: 387px;
+    border-radius: 12.5px 12.5px 0 0;
+    border-top: 3.75px solid #CCEFEC;
+    border-right: 3.75px solid #CCEFEC;
+    border-left: 3.75px solid #CCEFEC;
+    background: #FFF;
+    box-shadow: 0 8.75px 8.75px 0 rgba(0, 0, 0, 0.10);
   }
 }
