@@ -9,6 +9,7 @@ import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
 import { LongTermGoalsItemComponent } from './long-term-goals/long-term-goals-item/long-term-goals-item.component';
 import { QuarterlyGoalsComponent } from './quarterly-goals/quarterly-goals.component';
 import { DateTimeComponent } from './date-time/date-time.component';
+import { QuarterlyGoalsHeaderComponent } from './quarterly-goals/quarterly-goals-header/quarterly-goals-header.component';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ import { DateTimeComponent } from './date-time/date-time.component';
     WeeklyGoalsComponent,
     QuarterlyGoalsComponent,
     DateTimeComponent,
+    QuarterlyGoalsHeaderComponent,
   ],
 })
 export class HomeComponent implements OnInit {

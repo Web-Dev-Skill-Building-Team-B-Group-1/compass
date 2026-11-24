@@ -1,6 +1,23 @@
 :host {
   display: block;
+
   .quarterly-goals-container {
-    
+    background-color: white;
+    width: 400px;
+    height: 591px;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #CCEFEC;
+    display: flex;
+    flex-direction: column;
+
+    .add-goal-button {
+      background: none;
+      border: none;
+      font-family: 'Oxygen';
+      font-size: 17.5px;
+      color: #5A5A5A;
+      padding: 17px 0px 0px 5px;
+    }
   }
 }

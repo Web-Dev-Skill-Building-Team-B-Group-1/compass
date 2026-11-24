@@ -6,6 +6,8 @@ import { BatchWriteService, BATCH_WRITE_SERVICE } from 'src/app/core/store/batch
 import { QuarterlyGoalsItemComponent } from './quarterly-goals-item/quarterly-goals-item.component';
 import { QuarterlyGoalData, WeeklyGoalData } from '../home.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { QuarterlyGoalsHeaderComponent } from './quarterly-goals-header/quarterly-goals-header.component';
+
 @Component({
   selector: 'app-quarterly-goals',
   templateUrl: './quarterly-goals.component.html',
@@ -13,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: QuarterlyGoalsAnimations,
   standalone: true,
-  imports: [QuarterlyGoalsItemComponent,
+  imports: [QuarterlyGoalsItemComponent, QuarterlyGoalsHeaderComponent
   ],
 })
 export class QuarterlyGoalsComponent implements OnInit {
@@ -73,7 +75,24 @@ export class QuarterlyGoalsComponent implements OnInit {
     },
   ];
 
+  // TODO (1/1): add mock items to quarterlyGoals matching QuarterlyGoalData structure
   quarterlyGoals: QuarterlyGoalData[] = [
+    {
+      __id: 'qg1',
+      __userId: 'test-user',
+      __hashtagId: 'ht1',
+      text: 'Do well in algorithms class',
+      completed: false,
+      order: 1,
+      hashtag: {
+        __id: 'ht1',
+        name: 'class-algorithms',
+        color: '#FFB987',
+      },
+      weeklyGoalsTotal: 1,
+      weeklyGoalsComplete: 0,
+    },
+
     {
       __id: 'qg2',
       __userId: 'test-user',
@@ -86,7 +105,23 @@ export class QuarterlyGoalsComponent implements OnInit {
         name: 'apply-internships',
         color: '#2DBDB1',
       },
-      weeklyGoalsTotal: 1,
+      weeklyGoalsTotal: 2,
+      weeklyGoalsComplete: 0,
+    },
+
+    {
+      __id: 'qg3',
+      __userId: 'test-user',
+      __hashtagId: 'ht3',
+      text: 'Technical interview prep',
+      completed: false,
+      order: 3,
+      hashtag: {
+        __id: 'ht3',
+        name: 'interview-technical',
+        color: '#EE8B72',
+      },
+      weeklyGoalsTotal: 3,
       weeklyGoalsComplete: 0,
     },
   ];
@@ -110,7 +145,7 @@ export class QuarterlyGoalsComponent implements OnInit {
   // --------------- OTHER -------------------------------
 
   constructor(
-     private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private injector: Injector,
     @Inject(BATCH_WRITE_SERVICE) private batch: BatchWriteService,
   ) { }

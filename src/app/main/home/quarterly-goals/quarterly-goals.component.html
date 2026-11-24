@@ -1,3 +1,10 @@
 <div class="quarterly-goals-container">
-  <app-quarterly-goals-item [goal]="quarterlyGoals[0]" (checked)="checkGoal($event)"></app-quarterly-goals-item>
+  <app-quarterly-goals-header></app-quarterly-goals-header>
+  @for (goal of quarterlyGoals; track goal.__id) {
+  <app-quarterly-goals-item [goal]="goal" (checked)="checkGoal($event)">
+  </app-quarterly-goals-item>
+  }
+  <button class="add-goal-button">
+    + Add a quarter goal
+  </button>
 </div>
